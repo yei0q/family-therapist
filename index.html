@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="المعالج الأسري">
+<meta name="application-name" content="المعالج الأسري">
+<meta name="theme-color" content="#090d12" id="themeColorMeta">
+<meta name="description" content="محلل العلاقات الأسرية - المنظور النفسي والإسلامي">
+
+<!-- PWA Manifest (inline via JS) -->
+<link rel="manifest" id="manifestLink">
+
+<!-- Apple Touch Icons (SVG inline as data URI via JS) -->
+<link rel="apple-touch-icon" id="appleTouchIcon">
+
+<!-- Open Graph -->
+<meta property="og:title" content="المعالج الأسري">
+<meta property="og:description" content="محلل العلاقات الأسرية - المنظور النفسي والإسلامي">
+<meta property="og:type" content="website">
+
+<title>المعالج الأسري</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Lora:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root{
+  --sky:#4aa8d8;--sky-light:#7cc4ea;--sky-dim:#2d7fa8;
+  --red:#e05555;--green:#4caf7d;--gold:#ffaa00;--gold-dim:rgba(255,170,0,.18);
+  --crisis:#ff4444;--crisis-dim:rgba(255,68,68,.12);
+  --bg:#090d12;--card:#111a24;--card2:#172030;
+  --bw:rgba(255,255,255,.07);--bsky:rgba(74,168,216,.16);
+  --text:#edf2f7;--td:#a8bdd0;--muted:#526070;--white:#fff;
+  --qbg:rgba(74,168,216,.06);--bbg:rgba(74,168,216,.09);--bbd:rgba(74,168,216,.26);
+  --wbbg:rgba(255,255,255,.05);--wbbd:rgba(255,255,255,.13);--wbc:rgba(255,255,255,.65);
+  --ibg:rgba(74,168,216,.05);--tgl:rgba(255,255,255,.07);
+  --gt:rgba(74,168,216,.10);--gb:rgba(74,168,216,.06);--gl:rgba(74,168,216,.025);
+  --shadow:0 8px 32px rgba(0,0,0,.4);
+  --shadow-sm:0 2px 12px rgba(0,0,0,.25);
+  --radius:16px;--radius-sm:10px;
+  --streak:#ff9c00;
+}
+[data-theme="light"]{
+  --bg:#f0f6fb;--card:#fff;--card2:#e8f2f9;
+  --bw:rgba(0,0,0,.08);--bsky:rgba(74,168,216,.25);
+  --text:#0d1a26;--td:#2d4a60;--muted:#7a9ab0;--white:#0d1a26;
+  --qbg:rgba(74,168,216,.08);--bbg:rgba(74,168,216,.12);--bbd:rgba(74,168,216,.35);
+  --wbbg:rgba(0,0,0,.04);--wbbd:rgba(0,0,0,.12);--wbc:rgba(0,0,0,.55);
+  --ibg:rgba(74,168,216,.06);--tgl:rgba(0,0,0,.06);
+  --gt:rgba(74,168,216,.07);--gb:rgba(74,168,216,.03);--gl:rgba(74,168,216,.04);
+  --shadow:0 8px 32px rgba(0,0,0,.12);--shadow-sm:0 2px 12px rgba(0,0,0,.08);
+}
+
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{transition:background .3s,color .3s;scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Tajawal',sans-serif;min-height:100vh;overflow-x:hidden;
+  transition:background .3s,color .3s;
+}
+[data-lang="en"] body{font-family:'Inter',sans-serif;}
+
+/* ===== BACKGROUND ===== */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -5%,var(--gt) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 30% at 95% 95%,var(--gb) 0%,transparent 55%),
+    radial-gradient(ellipse 30% 20% at 5% 50%,rgba(74,168,216,.04) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--gl) 1px,transparent 1px),linear-gradient(90deg,var(--gl) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;z-index:0;
+}
+
+/* ===== LAYOUT ===== */
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 18px 100px;}
+
+/* ===== TOP BAR ===== */
+.top-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0 10px;position:sticky;top:0;z-index:100;
+  background:linear-gradient(var(--bg) 80%,transparent);
+  backdrop-filter:blur(6px);
+}
+.top-left,.top-right{display:flex;align-items:center;gap:8px;}
+.tpill{
+  display:flex;align-items:center;gap:5px;
+  background:var(--card);border:1px solid var(--bw);
+  color:var(--td);border-radius:20px;padding:6px 13px;
+  font-size:.78rem;font-family:inherit;cursor:pointer;
+  transition:all .2s;position:relative;
+}
+.tpill:hover{border-color:var(--sky-dim);color:var(--sky-light);background:var(--card2);}
+.tpill .ti{font-size:.85rem;}
+.history-btn-active{border-color:var(--sky-dim)!important;color:var(--sky-light)!important;}
+.notif-badge{
+  background:var(--red);color:#fff;border-radius:50%;
+  width:16px;height:16px;font-size:.6rem;display:inline-flex;
+  align-items:center;justify-content:center;font-weight:700;
+}
+.menu-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--card);border:1px solid var(--bw);
+  color:var(--td);border-radius:20px;padding:6px 13px;
+  font-size:.78rem;font-family:inherit;cursor:pointer;
+  transition:all .2s;
+}
+.menu-btn:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+.menu-dropdown{
+  position:absolute;top:calc(100% + 6px);
+  inset-inline-end:0;
+  background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius-sm);padding:6px;
+  min-width:170px;z-index:200;
+  box-shadow:var(--shadow);
+  display:none;animation:fadeDown .18s ease;
+}
+.menu-dropdown.on{display:block;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.menu-item{
+  padding:9px 12px;border-radius:8px;cursor:pointer;
+  font-size:.82rem;color:var(--td);transition:all .15s;
+  display:flex;align-items:center;gap:7px;
+}
+.menu-item:hover{background:var(--card2);color:var(--text);}
+.top-right{position:relative;}
+
+/* ===== HEADER ===== */
+header{text-align:center;padding:28px 0 20px;}
+.logo-wrap{position:relative;width:72px;height:72px;margin:0 auto 14px;}
+.logo-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:2px solid transparent;
+  background:linear-gradient(var(--card),var(--card)) padding-box,
+             linear-gradient(135deg,var(--sky),var(--sky-dim),var(--gold)) border-box;
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.logo-inner{
+  position:absolute;inset:6px;border-radius:50%;
+  background:var(--card2);display:flex;align-items:center;
+  justify-content:center;font-size:1.8rem;
+}
+h1{font-size:1.7rem;font-weight:700;font-family:'Amiri',serif;line-height:1.2;letter-spacing:.5px;}
+[data-lang="en"] h1{font-family:'Lora',serif;}
+.tagline{color:var(--muted);font-size:.78rem;margin-top:6px;letter-spacing:.3px;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bsky),transparent);margin:20px 0 0;}
+
+/* ===== STREAK BADGE ===== */
+.streak-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--gold-dim);border:1px solid rgba(255,170,0,.3);
+  border-radius:20px;padding:4px 12px;font-size:.75rem;color:var(--gold);
+  margin:8px auto 0;cursor:pointer;transition:all .2s;
+}
+.streak-badge:hover{background:rgba(255,170,0,.25);}
+.streak-fire{animation:flicker .8s ease-in-out infinite alternate;}
+@keyframes flicker{from{transform:scale(1);}to{transform:scale(1.15);}}
+
+/* ===== BANNERS ===== */
+.welcome-banner,.reminder-banner,.followup-banner,.crisis-banner{
+  display:none;border-radius:var(--radius);padding:14px 16px;
+  margin:14px 0;animation:slideIn .3s ease;
+}
+.welcome-banner.on,.reminder-banner.on,.followup-banner.on,.crisis-banner.on{display:flex;align-items:flex-start;gap:12px;}
+@keyframes slideIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+
+.welcome-banner{background:var(--card);border:1px solid var(--bsky);}
+.welcome-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+.welcome-text{font-size:.84rem;color:var(--td);line-height:1.65;flex:1;}
+.welcome-close{
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:.9rem;flex-shrink:0;padding:2px 6px;border-radius:6px;
+  transition:color .15s;
+}
+.welcome-close:hover{color:var(--text);}
+
+.reminder-banner{background:var(--card);border:1px solid var(--gold-dim);}
+.reminder-icon{font-size:1.2rem;flex-shrink:0;}
+.reminder-text{font-size:.82rem;color:var(--td);flex:1;}
+.reminder-btn{
+  background:var(--gold-dim);border:1px solid rgba(255,170,0,.3);
+  color:var(--gold);border-radius:8px;padding:5px 12px;
+  font-size:.76rem;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;
+}
+.reminder-btn:hover{background:rgba(255,170,0,.3);}
+
+.followup-banner{background:var(--card);border:1px solid var(--bsky);}
+.fu-icon{font-size:1.2rem;flex-shrink:0;}
+.fu-body{flex:1;}
+.fu-title{font-size:.85rem;font-weight:600;color:var(--sky-light);margin-bottom:3px;}
+.fu-text{font-size:.8rem;color:var(--td);}
+.fu-btn{
+  background:var(--bsky);border:1px solid var(--bbd);
+  color:var(--sky-light);border-radius:8px;padding:5px 12px;
+  font-size:.76rem;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;
+}
+.fu-btn:hover{background:var(--bbg);}
+
+/* ===== CRISIS BANNER ===== */
+.crisis-banner{
+  background:var(--crisis-dim);border:2px solid rgba(255,68,68,.4);
+  border-radius:var(--radius);animation:crisisPulse 2s ease-in-out infinite;
+}
+@keyframes crisisPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.2);}50%{box-shadow:0 0 0 8px rgba(255,68,68,.0);}}
+.crisis-icon{font-size:1.4rem;flex-shrink:0;}
+.crisis-body{flex:1;}
+.crisis-title{font-size:.9rem;font-weight:700;color:#ff6b6b;margin-bottom:4px;}
+.crisis-text{font-size:.8rem;color:var(--td);line-height:1.6;}
+.crisis-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.crisis-link{
+  background:rgba(255,68,68,.15);border:1px solid rgba(255,68,68,.3);
+  color:#ff8888;border-radius:8px;padding:5px 12px;
+  font-size:.76rem;text-decoration:none;transition:all .2s;
+}
+.crisis-link:hover{background:rgba(255,68,68,.25);}
+.crisis-close{
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1rem;padding:2px 6px;border-radius:6px;flex-shrink:0;
+  transition:color .15s;
+}
+.crisis-close:hover{color:var(--text);}
+
+/* ===== DUA CARD ===== */
+.dua-card{
+  display:none;background:var(--gold-dim);border:1px solid rgba(255,170,0,.25);
+  border-radius:var(--radius);padding:14px 18px;margin:14px 0;
+  animation:slideIn .3s ease;
+}
+.dua-card.on{display:block;}
+.dua-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.dua-title{font-size:.82rem;font-weight:600;color:var(--gold);flex:1;}
+.dua-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;}
+.dua-text{font-family:'Amiri',serif;font-size:1.05rem;color:var(--text);line-height:1.9;text-align:center;direction:rtl;}
+.dua-source{font-size:.72rem;color:var(--muted);text-align:center;margin-top:6px;}
+
+/* ===== PINNED STRIP ===== */
+.pinned-strip{
+  display:none;background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius);padding:12px 16px;margin:12px 0;
+}
+.pinned-strip.on{display:block;}
+.pinned-title{font-size:.8rem;font-weight:600;color:var(--sky-light);margin-bottom:8px;}
+#pinnedList{display:flex;flex-wrap:wrap;gap:7px;}
+.pinned-item{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--bsky);border:1px solid var(--bbd);
+  border-radius:20px;padding:4px 10px;font-size:.74rem;color:var(--td);
+}
+.unpin{cursor:pointer;color:var(--muted);font-size:.7rem;transition:color .15s;}
+.unpin:hover{color:var(--red);}
+
+/* ===== INCOGNITO STRIP ===== */
+.incognito-strip{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.04);border:1px dashed var(--bw);
+  border-radius:var(--radius-sm);padding:8px 14px;margin:8px 0;font-size:.76rem;color:var(--muted);
+}
+.incognito-strip span{flex:1;}
+.incognito-toggle{
+  background:none;border:1px solid var(--bw);border-radius:6px;
+  color:var(--muted);cursor:pointer;padding:3px 9px;font-size:.72rem;font-family:inherit;transition:all .15s;
+}
+.incognito-toggle:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+.incognito-active .incognito-strip{border-color:rgba(74,168,216,.3);color:var(--sky-light);background:var(--bsky);}
+
+/* ===== LABELS ===== */
+.lbl{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:20px 0 10px;}
+
+/* ===== REL GRID ===== */
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:6px;}
+@media(max-width:480px){.rel-grid{grid-template-columns:repeat(2,1fr);}}
+.rel-btn{
+  background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius-sm);padding:12px 8px;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  cursor:pointer;transition:all .22s;font-family:inherit;
+}
+.rel-btn:hover{border-color:var(--sky-dim);background:var(--card2);transform:translateY(-1px);}
+.rel-btn.active{
+  border-color:var(--sky);background:var(--bsky);
+  box-shadow:0 0 0 3px rgba(74,168,216,.1);
+}
+.rel-btn .ic{font-size:1.4rem;}
+.rel-txt{font-size:.72rem;color:var(--td);font-weight:500;text-align:center;}
+.rel-btn.active .rel-txt{color:var(--sky-light);}
+
+/* ===== INPUT CARD ===== */
+.input-card{
+  background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:border-color .2s;
+}
+.input-card:focus-within{border-color:var(--sky-dim);}
+.tabs{display:flex;border-bottom:1px solid var(--bw);}
+.tab{
+  flex:1;padding:11px 14px;background:none;border:none;
+  font-family:inherit;font-size:.82rem;color:var(--muted);
+  cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;
+}
+.tab.active{color:var(--sky-light);border-bottom-color:var(--sky);}
+.tab:hover:not(.active){color:var(--td);}
+
+.text-pane{padding:14px;}
+.text-pane.off{display:none;}
+textarea{
+  width:100%;min-height:110px;background:transparent;border:none;
+  color:var(--text);font-family:inherit;font-size:.9rem;resize:vertical;
+  line-height:1.7;outline:none;
+}
+textarea::placeholder{color:var(--muted);}
+
+.voice-pane{display:none;padding:20px 14px;text-align:center;}
+.voice-pane.on{display:block;}
+.mic-selector{display:flex;align-items:center;gap:5px;margin-bottom:12px;justify-content:center;}
+.mic-selector select{
+  background:var(--card2);border:1px solid var(--bw);color:var(--td);
+  border-radius:10px;padding:4px 8px;font-size:.74rem;font-family:inherit;
+}
+.mic-selector label{font-size:.72rem;color:var(--muted);}
+.mic-wrap{position:relative;display:inline-block;margin-bottom:10px;}
+.mic-ring{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:2px solid var(--sky-dim);opacity:0;transition:opacity .3s;
+}
+.mic-ring.rec{opacity:1;animation:ringPulse 1.2s ease-in-out infinite;}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.15);opacity:.3;}}
+.mic-btn{
+  width:60px;height:60px;border-radius:50%;background:var(--card2);
+  border:2px solid var(--bw);font-size:1.5rem;cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;
+}
+.mic-btn:hover{border-color:var(--sky-dim);background:var(--bsky);}
+.mic-btn.rec{background:rgba(224,85,85,.15);border-color:var(--red);}
+.v-status{font-size:.8rem;color:var(--muted);margin-top:8px;}
+.v-status.rec{color:var(--red);}
+.v-hint{font-size:.72rem;color:var(--muted);margin-top:4px;opacity:.7;}
+.v-transcript{
+  display:none;margin-top:10px;background:var(--card2);
+  border-radius:10px;padding:10px 13px;font-size:.83rem;
+  color:var(--td);text-align:start;line-height:1.6;max-height:120px;overflow-y:auto;
+}
+.v-transcript.on{display:block;}
+
+.inp-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--bw);}
+.char-c{font-size:.72rem;color:var(--muted);}
+.send-btn{
+  background:linear-gradient(135deg,var(--sky-dim),var(--sky));
+  border:none;color:#fff;border-radius:10px;padding:9px 22px;
+  font-family:inherit;font-size:.84rem;font-weight:600;cursor:pointer;
+  transition:all .2s;letter-spacing:.3px;
+}
+.send-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 16px rgba(74,168,216,.35);}
+.send-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+/* ===== LOAD CARD ===== */
+.load-card{display:none;background:var(--card);border:1px solid var(--bw);border-radius:var(--radius);padding:24px;margin:16px 0;}
+.load-card.on{display:block;}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:18px;}
+.wb{
+  width:5px;background:var(--sky-dim);border-radius:3px;
+  animation:wave .9s ease-in-out infinite;
+}
+.wb:nth-child(1){height:14px;animation-delay:0s;}
+.wb:nth-child(2){height:22px;animation-delay:.1s;}
+.wb:nth-child(3){height:30px;animation-delay:.2s;}
+.wb:nth-child(4){height:22px;animation-delay:.3s;}
+.wb:nth-child(5){height:14px;animation-delay:.4s;}
+@keyframes wave{0%,100%{transform:scaleY(.5);opacity:.5;}50%{transform:scaleY(1);opacity:1;}}
+.load-steps{display:flex;flex-direction:column;gap:8px;}
+.load-step{display:flex;align-items:center;gap:10px;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);transition:all .3s;flex-shrink:0;}
+.dot.active{background:var(--sky);box-shadow:0 0 8px var(--sky);}
+.dot.done{background:var(--green);}
+.lst{font-size:.78rem;color:var(--muted);transition:color .3s;}
+.lst.active{color:var(--sky-light);}
+.lst.done{color:var(--green);}
+
+/* ===== RESPONSE CARD ===== */
+.resp-card{display:none;background:var(--card);border:1px solid var(--bw);border-radius:var(--radius);overflow:hidden;margin:16px 0;}
+.resp-card.on{display:block;animation:slideIn .35s ease;}
+.resp-head{
+  display:flex;align-items:center;gap:10px;
+  padding:16px 20px;border-bottom:1px solid var(--bw);
+  background:linear-gradient(135deg,var(--card2),var(--card));
+}
+.resp-head h3{font-size:.95rem;font-weight:700;color:var(--sky-light);}
+.resp-body{padding:18px 20px;}
+
+.sec{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--bw);}
+.sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.sec-title{margin-bottom:10px;}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--bbg);border:1px solid var(--bbd);
+  color:var(--sky-light);border-radius:6px;padding:3px 10px;font-size:.75rem;font-weight:600;
+}
+.badge.w{background:var(--wbbg);border-color:var(--wbbd);color:var(--wbc);}
+.sec-text{font-size:.85rem;color:var(--td);line-height:1.75;}
+
+/* Quran box */
+.q-box{
+  background:var(--qbg);border-inline-start:3px solid var(--gold);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:12px 16px;
+}
+[dir="rtl"] .q-box{border-inline-start:none;border-inline-end:3px solid var(--gold);}
+.q-txt{font-family:'Amiri',serif;font-size:1.05rem;color:var(--text);line-height:1.9;}
+.q-src{font-size:.74rem;color:var(--muted);margin-top:5px;}
+
+/* Steps */
+.steps-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.step-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--card2);border:1px solid var(--bw);border-radius:var(--radius-sm);
+  padding:11px 13px;cursor:pointer;transition:all .2s;
+}
+.step-item:hover{border-color:var(--sky-dim);}
+.step-item.done{background:rgba(76,175,125,.07);border-color:rgba(76,175,125,.25);}
+.step-check{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:transparent;flex-shrink:0;margin-top:1px;transition:all .25s;
+}
+.step-item.done .step-check{background:var(--green);border-color:var(--green);color:#fff;}
+.step-txt{font-size:.83rem;color:var(--td);line-height:1.6;flex:1;}
+.step-item.done .step-txt{text-decoration:line-through;opacity:.6;}
+.pin-btn{
+  background:none;border:none;cursor:pointer;font-size:.85rem;
+  opacity:.4;transition:all .15s;padding:2px;flex-shrink:0;
+}
+.pin-btn:hover{opacity:1;}
+.pin-btn.pinned{opacity:1;}
+
+/* Progress */
+.progress-wrap{height:5px;background:var(--bw);border-radius:4px;overflow:hidden;margin-bottom:6px;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--sky-dim),var(--sky));border-radius:4px;transition:width .4s ease;}
+.progress-label{font-size:.74rem;color:var(--muted);text-align:end;}
+
+/* Reflection box */
+.reflection-box{
+  background:var(--ibg);border:1px solid var(--bw);border-radius:var(--radius-sm);
+  padding:14px;margin-top:14px;
+}
+.reflection-title{font-size:.8rem;font-weight:600;color:var(--td);margin-bottom:8px;}
+.reflection-input{
+  width:100%;min-height:70px;background:transparent;
+  border:none;color:var(--text);font-family:inherit;font-size:.82rem;
+  resize:none;outline:none;line-height:1.6;
+}
+.reflection-input::placeholder{color:var(--muted);}
+.reflection-save{
+  margin-top:8px;background:var(--card2);border:1px solid var(--bw);
+  color:var(--td);border-radius:8px;padding:5px 14px;
+  font-family:inherit;font-size:.75rem;cursor:pointer;transition:all .2s;
+}
+.reflection-save:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+
+/* YouTube fallback */
+.yt-fallback{
+  display:flex;align-items:center;gap:13px;
+  background:var(--wbbg);border:1px solid var(--wbbd);border-radius:var(--radius-sm);
+  padding:13px 16px;text-decoration:none;transition:all .2s;margin-bottom:12px;
+}
+.yt-fallback:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);}
+.share-btn{
+  background:none;border:1px solid var(--bw);color:var(--muted);
+  border-radius:8px;padding:6px 14px;font-family:inherit;font-size:.76rem;
+  cursor:pointer;transition:all .2s;
+}
+.share-btn:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+
+/* Print card button */
+.print-card-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:none;border:1px solid var(--bw);color:var(--muted);
+  border-radius:8px;padding:6px 14px;font-family:inherit;font-size:.76rem;
+  cursor:pointer;transition:all .2s;margin-inline-start:8px;
+}
+.print-card-btn:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+
+/* Mood tracker */
+.mood-section{margin-top:16px;}
+.mood-label{font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+.mood-btns{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;}
+.mood-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:var(--card2);border:1px solid var(--bw);border-radius:10px;
+  padding:8px 6px;cursor:pointer;transition:all .2s;
+  flex:1;min-width:0;flex-shrink:1;
+}
+.mood-btn:hover{border-color:var(--sky-dim);transform:translateY(-2px);}
+.mood-btn.selected{border-color:var(--sky);background:var(--bsky);}
+.mood-emoji{font-size:1.3rem;}
+.mood-lbl{font-size:.66rem;color:var(--muted);}
+.mood-shift{
+  display:none;margin-top:8px;padding:8px 12px;border-radius:8px;
+  font-size:.78rem;background:var(--card2);border:1px solid var(--bw);color:var(--td);
+}
+.mood-shift.on{display:block;animation:fadeDown .2s ease;}
+
+/* ===== NEW BTN ===== */
+.new-btn{
+  display:block;width:100%;margin:16px 0;
+  background:linear-gradient(135deg,var(--card2),var(--card));
+  border:1px solid var(--bw);color:var(--sky-light);
+  border-radius:var(--radius-sm);padding:12px;
+  font-family:inherit;font-size:.88rem;font-weight:600;
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+}
+.new-btn:hover{border-color:var(--sky-dim);background:var(--bsky);}
+
+/* ===== DISCLAIMER ===== */
+.disc{font-size:.7rem;color:var(--muted);text-align:center;line-height:1.7;white-space:pre-line;margin:6px 0 20px;}
+
+/* ===== HISTORY PANEL ===== */
+.history-panel{
+  display:none;background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius);margin:10px 0;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.history-panel.on{display:block;animation:slideIn .2s ease;}
+.history-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border-bottom:1px solid var(--bw);
+  background:var(--card2);
+}
+.history-head h4{font-size:.88rem;font-weight:600;color:var(--text);}
+.hist-pdf{
+  background:var(--card);border:1px solid var(--bw);color:var(--td);
+  border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer;
+  font-family:inherit;transition:all .2s;
+}
+.hist-pdf:hover{border-color:var(--sky-dim);color:var(--sky-light);}
+.history-clear{
+  background:rgba(224,85,85,.1);border:1px solid rgba(224,85,85,.25);
+  color:var(--red);border-radius:6px;padding:4px 10px;
+  font-size:.72rem;font-family:inherit;cursor:pointer;transition:all .2s;
+}
+.history-clear:hover{background:rgba(224,85,85,.2);}
+.history-list{max-height:300px;overflow-y:auto;padding:8px;}
+.history-empty{text-align:center;color:var(--muted);font-size:.82rem;padding:24px;}
+.hist-item{
+  padding:11px 12px;border-radius:var(--radius-sm);cursor:pointer;
+  border:1px solid transparent;transition:all .18s;margin-bottom:5px;
+}
+.hist-item:hover{background:var(--card2);border-color:var(--bw);}
+.hist-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.hist-rel{font-size:.72rem;font-weight:600;color:var(--sky-light);}
+.hist-date{font-size:.7rem;color:var(--muted);}
+.hist-problem{font-size:.8rem;color:var(--td);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hist-meta{display:flex;gap:8px;margin-top:5px;}
+.hist-prog{font-size:.7rem;color:var(--green);}
+.hist-follow{font-size:.7rem;color:var(--gold);}
+
+/* ===== WEEKLY PANEL ===== */
+.weekly-panel{
+  display:none;background:var(--card);border:1px solid var(--bw);
+  border-radius:var(--radius);margin:10px 0;overflow:hidden;
+}
+.weekly-panel.on{display:block;animation:slideIn .2s ease;}
+.weekly-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border-bottom:1px solid var(--bw);background:var(--card2);
+}
+.weekly-head h4{font-size:.88rem;font-weight:600;color:var(--text);}
+.weekly-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;}
+.weekly-body{padding:16px;}
+.weekly-stat-row{display:flex;gap:10px;margin-bottom:16px;}
+.wstat{
+  flex:1;background:var(--card2);border:1px solid var(--bw);
+  border-radius:var(--radius-sm);padding:12px;text-align:center;
+}
+.wn{font-size:1.5rem;font-weight:700;color:var(--sky-light);}
+.wl{font-size:.7rem;color:var(--muted);margin-top:2px;}
+.weekly-insights{margin-top:10px;}
+.wi-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.8rem;color:var(--td);}
+.wi-dot{width:6px;height:6px;border-radius:50%;background:var(--sky);flex-shrink:0;}
+
+/* ===== VIDEO MODAL ===== */
+.vid-modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);z-index:999;
+  align-items:center;justify-content:center;padding:20px;
+}
+.vid-modal.on{display:flex;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.vid-inner{background:var(--card);border-radius:var(--radius);overflow:hidden;width:100%;max-width:640px;}
+.vid-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bw);}
+.vid-title-txt{font-size:.85rem;color:var(--td);flex:1;}
+.vid-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;}
+.vid-frame{width:100%;height:0;padding-bottom:56.25%;display:block;border:none;}
+
+/* ===== GUIDE MODAL ===== */
+.guide-modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.7);z-index:999;
+  align-items:center;justify-content:center;padding:20px;
+}
+.guide-modal.on{display:flex;animation:fadeIn .2s ease;}
+.guide-content{
+  background:var(--card);border:1px solid var(--bw);border-radius:var(--radius);
+  padding:24px;max-width:400px;width:100%;
+}
+.guide-content h3{font-size:1rem;color:var(--sky-light);margin-bottom:16px;}
+.guide-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;}
+.guide-emoji{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.guide-text{font-size:.82rem;color:var(--td);line-height:1.6;}
+.guide-close{
+  margin-top:16px;width:100%;background:var(--bsky);
+  border:1px solid var(--bbd);color:var(--sky-light);
+  border-radius:var(--radius-sm);padding:10px;
+  font-family:inherit;font-size:.86rem;cursor:pointer;transition:all .2s;
+}
+.guide-close:hover{background:var(--bbg);}
+
+/* ===== PRINT STYLES ===== */
+@media print{
+  .top-bar,.welcome-banner,.reminder-banner,.followup-banner,.crisis-banner,
+  .dua-card,.pinned-strip,.input-card,.load-card,.new-btn,.disc,
+  .share-btn,.print-card-btn,.pin-btn,.reflection-box,
+  .hist-pdf,.history-clear,.guide-modal,.vid-modal{display:none!important;}
+  body{background:#fff;color:#000;}
+  .resp-card{display:block!important;border:none;box-shadow:none;}
+  .step-item{break-inside:avoid;}
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--bw);border-radius:10px;}
+::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popIn{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
+.resp-card.on .sec{animation:popIn .3s ease both;}
+.resp-card.on .sec:nth-child(1){animation-delay:.05s;}
+.resp-card.on .sec:nth-child(2){animation-delay:.1s;}
+.resp-card.on .sec:nth-child(3){animation-delay:.15s;}
+.resp-card.on .sec:nth-child(4){animation-delay:.2s;}
+
+/* ===== MOBILE / PWA ===== */
+
+/* Safe area insets for iPhone notch & home bar */
+.wrap{
+  padding-bottom:calc(100px + env(safe-area-inset-bottom));
+  padding-left:calc(18px + env(safe-area-inset-left));
+  padding-right:calc(18px + env(safe-area-inset-right));
+}
+.top-bar{
+  padding-top:calc(14px + env(safe-area-inset-top));
+}
+
+/* Bottom navigation bar for mobile */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--card);
+  border-top:1px solid var(--bw);
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+@media(max-width:600px){
+  .bottom-nav{display:flex;}
+  /* hide top bar pills on mobile — bottom nav replaces them */
+  .top-left{display:none;}
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-family:inherit;font-size:.62rem;padding:6px 4px;
+  transition:color .2s;-webkit-tap-highlight-color:transparent;
+}
+.bnav-btn.active{color:var(--sky-light);}
+.bnav-btn:active{opacity:.7;}
+.bnav-icon{font-size:1.3rem;line-height:1;}
+.bnav-badge{
+  position:absolute;top:2px;
+  background:var(--red);color:#fff;border-radius:50%;
+  width:14px;height:14px;font-size:.55rem;
+  display:none;align-items:center;justify-content:center;
+  font-weight:700;
+}
+.bnav-badge.on{display:flex;}
+.bnav-wrap{position:relative;display:inline-flex;}
+
+/* Touch targets — bigger on mobile */
+@media(max-width:600px){
+  .rel-btn{padding:14px 8px;min-height:68px;}
+  .rel-btn .ic{font-size:1.6rem;}
+  .tab{padding:13px 14px;}
+  .send-btn{padding:12px 28px;font-size:.9rem;}
+  .step-item{padding:13px;}
+  .mood-btn{padding:10px 8px;}
+  .mic-btn{width:70px;height:70px;font-size:1.7rem;}
+  textarea{font-size:1rem;min-height:120px;}
+  /* prevent iOS zoom on input focus */
+  input, select, textarea{font-size:16px!important;}
+  select{font-size:14px!important;}
+}
+
+/* Small phone tweaks */
+@media(max-width:380px){
+  .rel-grid{grid-template-columns:repeat(2,1fr);}
+  h1{font-size:1.4rem;}
+  .tpill span:not(.ti):not(.notif-badge){display:none;}
+}
+
+/* Landscape on mobile */
+@media(max-height:500px) and (orientation:landscape){
+  header{padding:12px 0 8px;}
+  .logo-wrap{width:48px;height:48px;}
+  .logo-inner{font-size:1.2rem;}
+  h1{font-size:1.2rem;}
+  .tagline{display:none;}
+}
+
+/* ===== PWA INSTALL BANNER ===== */
+.install-banner{
+  display:none;position:fixed;bottom:calc(72px + env(safe-area-inset-bottom));
+  left:16px;right:16px;z-index:300;
+  background:var(--card);border:1px solid var(--bsky);
+  border-radius:var(--radius);padding:14px 16px;
+  box-shadow:var(--shadow);animation:slideUp .3s ease;
+}
+.install-banner.on{display:flex;align-items:center;gap:12px;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.install-icon{font-size:2rem;flex-shrink:0;}
+.install-body{flex:1;}
+.install-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.install-sub{font-size:.74rem;color:var(--muted);}
+.install-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.install-btn{
+  background:linear-gradient(135deg,var(--sky-dim),var(--sky));
+  border:none;color:#fff;border-radius:8px;padding:7px 14px;
+  font-family:inherit;font-size:.76rem;font-weight:600;cursor:pointer;
+  white-space:nowrap;transition:all .2s;
+}
+.install-btn:active{opacity:.8;}
+.install-dismiss{
+  background:none;border:1px solid var(--bw);color:var(--muted);
+  border-radius:8px;padding:5px 10px;font-family:inherit;
+  font-size:.72rem;cursor:pointer;text-align:center;transition:all .15s;
+}
+
+/* ===== iOS INSTALL GUIDE ===== */
+.ios-guide{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.75);align-items:flex-end;justify-content:center;
+  padding:0 16px calc(16px + env(safe-area-inset-bottom));
+}
+.ios-guide.on{display:flex;animation:fadeIn .2s ease;}
+.ios-guide-card{
+  background:var(--card);border:1px solid var(--bw);border-radius:var(--radius);
+  padding:20px;width:100%;max-width:400px;text-align:center;
+}
+.ios-guide-title{font-size:1rem;font-weight:700;color:var(--sky-light);margin-bottom:12px;}
+.ios-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;text-align:start;}
+.ios-step{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--td);}
+.ios-step-num{
+  width:24px;height:24px;border-radius:50%;background:var(--bsky);
+  border:1px solid var(--bbd);color:var(--sky-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;flex-shrink:0;
+}
+.ios-arrow{
+  position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+  width:0;height:0;
+  border-left:10px solid transparent;border-right:10px solid transparent;
+  border-top:10px solid var(--card);
+}
+.ios-guide-close{
+  width:100%;background:var(--bsky);border:1px solid var(--bbd);
+  color:var(--sky-light);border-radius:var(--radius-sm);padding:10px;
+  font-family:inherit;font-size:.86rem;cursor:pointer;
+}
+
+/* Smooth scrolling & overscroll */
+html{-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
+body{overscroll-behavior:none;}
+.history-list,.weekly-body{-webkit-overflow-scrolling:touch;}
+
+/* Remove tap highlight globally */
+*{-webkit-tap-highlight-color:transparent;}
+button{-webkit-appearance:none;appearance:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-left">
+    <button class="tpill history-btn" id="histBtn" onclick="toggleHistory()">
+      <span class="ti">🗂️</span><span id="histLabel">السجل</span>
+      <span class="notif-badge" id="histNotif" style="display:none">0</span>
+    </button>
+    <button class="tpill" id="weeklyBtn" onclick="toggleWeekly()">
+      <span class="ti">📊</span><span id="weeklyLabel">ملخص الأسبوع</span>
+    </button>
+  </div>
+  <div class="top-right">
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">⚙️ <span id="menuLabel">القائمة</span></button>
+    <div class="menu-dropdown" id="menuDropdown">
+      <div class="menu-item" onclick="toggleLang()">🌐 <span id="langLabel">English</span></div>
+      <div class="menu-item" onclick="toggleTheme()"><span id="themeIcon">☀️</span> <span id="themeLabel">Light</span></div>
+      <div class="menu-item" onclick="toggleCharCounter()">🔢 <span id="counterLabel">إظهار عداد الأحرف</span></div>
+      <div class="menu-item" onclick="toggleIncognito()">🕵️ <span id="incogLabel">وضع المجهول</span></div>
+      <div class="menu-item" onclick="showGuide()">❓ <span id="guideMenuLabel">دليل سريع</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap"><div class="logo-ring"></div><div class="logo-inner">🌿</div></div>
+  <h1 id="siteTitle"><span>المعالج</span> الأسري</h1>
+  <p class="tagline" id="siteTagline">محلل العلاقات الأسرية · المنظور النفسي والإسلامي</p>
+  <div id="streakWrap" style="text-align:center;margin-top:6px;"></div>
+  <div class="divider"></div>
+</header>
+
+<!-- WELCOME BANNER -->
+<div class="welcome-banner" id="welcomeBanner">
+  <div class="welcome-icon">🌿</div>
+  <div class="welcome-text" id="welcomeText">مرحباً بك في المعالج الأسري. هنا يمكنك مشاركة مشاعرك بهدوء، وسأحاول فهمها وتقديم منظور نفسي وإسلامي مع خطوات عملية صغيرة.</div>
+  <button class="welcome-close" onclick="closeWelcome()">✕</button>
+</div>
+
+<!-- CRISIS BANNER -->
+<div class="crisis-banner" id="crisisBanner">
+  <div class="crisis-icon">🆘</div>
+  <div class="crisis-body">
+    <div class="crisis-title" id="crisisTitle">يبدو أنك تمر بوقت صعب جداً</div>
+    <div class="crisis-text" id="crisisText">إذا كنت في خطر أو تفكر في إيذاء نفسك أو أحد أفراد أسرتك، يرجى التواصل فوراً مع جهات الدعم.</div>
+    <div class="crisis-links">
+      <a class="crisis-link" href="tel:920033360" id="crisisLink1">📞 خط مساندة السعودية: 920033360</a>
+      <a class="crisis-link" href="tel:08008880700" id="crisisLink2">📞 خط دعم الأسرة مصر: 16021</a>
+      <a class="crisis-link" href="tel:180" id="crisisLink3">📞 الطوارئ الكويت: 112</a>
+    </div>
+  </div>
+  <button class="crisis-close" onclick="$('crisisBanner').classList.remove('on')">✕</button>
+</div>
+
+<!-- REMINDER BANNER -->
+<div class="reminder-banner" id="reminderBanner">
+  <div class="reminder-icon">⏰</div>
+  <div class="reminder-text" id="reminderText"></div>
+  <button class="reminder-btn" onclick="openReminder()" id="reminderBtn">عرض</button>
+</div>
+
+<!-- FOLLOW-UP BANNER -->
+<div class="followup-banner" id="followupBanner">
+  <div class="fu-icon">🔔</div>
+  <div class="fu-body">
+    <div class="fu-title" id="fuTitle">متابعة مشكلة سابقة</div>
+    <div class="fu-text" id="fuText"></div>
+  </div>
+  <button class="fu-btn" id="fuBtn" onclick="openFollowup()"></button>
+</div>
+
+<!-- DUA CARD -->
+<div class="dua-card" id="duaCard">
+  <div class="dua-header">
+    <span>🤲</span>
+    <span class="dua-title" id="duaTitle">دعاء للمساعدة</span>
+    <button class="dua-close" onclick="$('duaCard').classList.remove('on')">✕</button>
+  </div>
+  <div class="dua-text" id="duaText"></div>
+  <div class="dua-source" id="duaSource"></div>
+</div>
+
+<!-- PINNED STRIP -->
+<div class="pinned-strip" id="pinnedStrip">
+  <div class="pinned-title" id="pinnedTitle">📌 خطواتي المحفوظة</div>
+  <div id="pinnedList"></div>
+</div>
+
+<!-- HISTORY PANEL -->
+<div class="history-panel" id="historyPanel">
+  <div class="history-head">
+    <h4 id="histPanelTitle">سجل المحادثات</h4>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="hist-pdf" onclick="exportHistoryPDF()" id="exportPdfBtn">PDF</button>
+      <button class="history-clear" onclick="clearHistory()" id="clearHistBtn">مسح الكل</button>
+    </div>
+  </div>
+  <div class="history-list" id="historyList"></div>
+</div>
+
+<!-- WEEKLY PANEL -->
+<div class="weekly-panel" id="weeklyPanel">
+  <div class="weekly-head">
+    <h4 id="weeklyPanelTitle">ملخص الأسبوع</h4>
+    <button class="weekly-close" onclick="document.getElementById('weeklyPanel').classList.remove('on')">✕</button>
+  </div>
+  <div class="weekly-body" id="weeklyBody"></div>
+</div>
+
+<!-- INCOGNITO STRIP -->
+<div class="incognito-strip" id="incognitoStrip" style="display:none;">
+  <span>🕵️</span>
+  <span id="incogText">وضع المجهول مفعّل — لن تُحفظ هذه الجلسة</span>
+  <button class="incognito-toggle" onclick="toggleIncognito()" id="incogToggle">إيقاف</button>
+</div>
+
+<!-- REL -->
+<p class="lbl" id="lblRel">نوع العلاقة</p>
+<div class="rel-grid" id="relGrid">
+  <button class="rel-btn active" data-rel-ar="الزوج / الزوجة" data-rel-en="Spouse" onclick="selectRel(this)"><span class="ic">💑</span><span class="rel-txt" data-ar="زوجية" data-en="Spouse">زوجية</span></button>
+  <button class="rel-btn" data-rel-ar="الأب / الأم" data-rel-en="Parents" onclick="selectRel(this)"><span class="ic">👨‍👩‍👦</span><span class="rel-txt" data-ar="مع الوالدين" data-en="Parents">مع الوالدين</span></button>
+  <button class="rel-btn" data-rel-ar="الأخ / الأخت" data-rel-en="Siblings" onclick="selectRel(this)"><span class="ic">🤝</span><span class="rel-txt" data-ar="مع الإخوة" data-en="Siblings">مع الإخوة</span></button>
+  <button class="rel-btn" data-rel-ar="الأبناء" data-rel-en="Children" onclick="selectRel(this)"><span class="ic">🧒</span><span class="rel-txt" data-ar="مع الأبناء" data-en="Children">مع الأبناء</span></button>
+  <button class="rel-btn" data-rel-ar="الأقارب" data-rel-en="Relatives" onclick="selectRel(this)"><span class="ic">🏡</span><span class="rel-txt" data-ar="مع الأقارب" data-en="Relatives">مع الأقارب</span></button>
+  <button class="rel-btn" data-rel-ar="صديق مقرب" data-rel-en="Close Friend" onclick="selectRel(this)"><span class="ic">👥</span><span class="rel-txt" data-ar="مع صديق" data-en="Friend">مع صديق</span></button>
+</div>
+
+<!-- INPUT -->
+<p class="lbl" id="lblProblem">احكيلي عن مشكلتك</p>
+<div class="input-card">
+  <div class="tabs">
+    <button class="tab active" id="tabTxt" onclick="switchTab('text')">✏️ كتابة</button>
+    <button class="tab" id="tabVoc" onclick="switchTab('voice')">🎙️ تسجيل صوتي</button>
+  </div>
+  <div class="text-pane" id="txtPane">
+    <textarea id="problemInput"></textarea>
+  </div>
+  <div class="voice-pane" id="vocPane">
+    <div class="mic-selector" id="micSelector" style="display:none;">
+      <label>🎤</label>
+      <select id="micSelect"></select>
+    </div>
+    <div class="mic-wrap"><div class="mic-ring" id="micRing"></div><button class="mic-btn" id="micBtn" onclick="toggleRec()">🎙️</button></div>
+    <div class="v-status" id="vStatus">اضغط على الميكروفون للبدء</div>
+    <div class="v-hint" id="vHint">يعمل على Chrome · اضغط مرة ثانية للإيقاف</div>
+    <div class="v-transcript" id="vTranscript"></div>
+  </div>
+  <div class="inp-footer">
+    <span class="char-c" id="charC" style="display:none">0</span>
+    <button class="send-btn" id="sendBtn" onclick="analyze()">تحليل المشكلة ✦</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="load-card" id="loadCard">
+  <div class="wave"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+  <div class="load-steps">
+    <div class="load-step"><div class="dot active" id="ld1"></div><span class="lst active" id="lt1">جاري تحليل المشكلة نفسياً وإسلامياً...</span></div>
+    <div class="load-step"><div class="dot" id="ld2"></div><span class="lst" id="lt2">جاري استخلاص الكلمات المفتاحية...</span></div>
+    <div class="load-step"><div class="dot" id="ld3"></div><span class="lst" id="lt3">جاري اختيار أفضل توجيه...</span></div>
+    <div class="load-step"><div class="dot" id="ld4"></div><span class="lst" id="lt4">جاري تجهيز النتائج...</span></div>
+  </div>
+</div>
+
+<!-- RESPONSE -->
+<div class="resp-card" id="respCard">
+  <div class="resp-head"><span style="font-size:1.2rem">🌿</span><h3 id="respTitle">التحليل والحل</h3></div>
+  <div class="resp-body" id="respBody"></div>
+</div>
+
+<button class="new-btn" id="newBtn" onclick="resetAll()" style="display:none">+ مشكلة جديدة</button>
+<p class="disc" id="discText">هذه الأداة لأغراض التوعية والدعم العاطفي فقط، وليست بديلاً عن الاستشارة المتخصصة.</p>
+
+<!-- VIDEO MODAL -->
+<div class="vid-modal" id="vidModal" onclick="if(event.target===this)closeVid()">
+  <div class="vid-inner">
+    <div class="vid-header">
+      <span class="vid-title-txt" id="vidModalTitle"></span>
+      <button class="vid-close" onclick="closeVid()">✕</button>
+    </div>
+    <iframe class="vid-frame" id="vidFrame" src="" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- GUIDE MODAL -->
+<div class="guide-modal" id="guideModal" onclick="if(event.target===this)hideGuide()">
+  <div class="guide-content">
+    <h3 id="guideTitle">دليل المعالج الأسري السريع</h3>
+    <div class="guide-item"><span class="guide-emoji">🗂️</span><span class="guide-text" id="guide1">السجل: يحفظ محادثاتك السابقة ويمكنك العودة إليها.</span></div>
+    <div class="guide-item"><span class="guide-emoji">📊</span><span class="guide-text" id="guide2">ملخص الأسبوع: يعرض تقدمك وإحصائيات أسبوعية.</span></div>
+    <div class="guide-item"><span class="guide-emoji">🎙️</span><span class="guide-text" id="guide3">التسجيل الصوتي: يمكنك التحدث بدلاً من الكتابة.</span></div>
+    <div class="guide-item"><span class="guide-emoji">📌</span><span class="guide-text" id="guide4">تثبيت الخطوات: احفظ الخطوات المهمة للرجوع إليها.</span></div>
+    <div class="guide-item"><span class="guide-emoji">🧘</span><span class="guide-text" id="guide5">تمرين التأمل: دوّن أفكارك بعد التحليل.</span></div>
+    <div class="guide-item"><span class="guide-emoji">🔔</span><span class="guide-text" id="guide6">تذكيرات: نذكّرك بالخطوات غير المكتملة.</span></div>
+    <div class="guide-item"><span class="guide-emoji">🕵️</span><span class="guide-text" id="guide7">وضع المجهول: جلسة بدون حفظ للخصوصية التامة.</span></div>
+    <div class="guide-item"><span class="guide-emoji">🆘</span><span class="guide-text" id="guide8">وضع الأزمة: يظهر تلقائياً عند اكتشاف كلمات خطرة.</span></div>
+    <button class="guide-close" onclick="hideGuide()" id="guideClose">حسناً</button>
+  </div>
+</div>
+
+
+</div><!-- end .wrap -->
+
+<!-- BOTTOM NAVIGATION (mobile only) -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bnav-btn active" id="bnavHome" onclick="bnavGo('home')">
+    <span class="bnav-icon">🏠</span>
+    <span id="bnavHomeLabel">الرئيسية</span>
+  </button>
+  <button class="bnav-btn" id="bnavHist" onclick="bnavGo('history')">
+    <div class="bnav-wrap">
+      <span class="bnav-icon">🗂️</span>
+      <span class="bnav-badge" id="bnavBadge">0</span>
+    </div>
+    <span id="bnavHistLabel">السجل</span>
+  </button>
+  <button class="bnav-btn" id="bnavWeekly" onclick="bnavGo('weekly')">
+    <span class="bnav-icon">📊</span>
+    <span id="bnavWeeklyLabel">الأسبوع</span>
+  </button>
+  <button class="bnav-btn" id="bnavMenu" onclick="bnavGo('menu')">
+    <span class="bnav-icon">⚙️</span>
+    <span id="bnavMenuLabel">القائمة</span>
+  </button>
+</nav>
+
+<!-- PWA INSTALL BANNER -->
+<div class="install-banner" id="installBanner">
+  <div class="install-icon">📲</div>
+  <div class="install-body">
+    <div class="install-title" id="installTitle">ثبّت التطبيق</div>
+    <div class="install-sub" id="installSub">أضفه للشاشة الرئيسية للوصول السريع</div>
+  </div>
+  <div class="install-actions">
+    <button class="install-btn" id="installBtn" onclick="doInstall()">تثبيت</button>
+    <button class="install-dismiss" onclick="dismissInstall()" id="installDismiss">لاحقاً</button>
+  </div>
+</div>
+
+<!-- iOS INSTALL GUIDE -->
+<div class="ios-guide" id="iosGuide" onclick="if(event.target===this)$('iosGuide').classList.remove('on')">
+  <div class="ios-guide-card">
+    <div class="ios-guide-title" id="iosGuideTitle">أضف التطبيق للشاشة الرئيسية</div>
+    <div class="ios-steps">
+      <div class="ios-step"><div class="ios-step-num">1</div><span id="iosStep1">اضغط على زر المشاركة <strong>⬆</strong> في أسفل المتصفح</span></div>
+      <div class="ios-step"><div class="ios-step-num">2</div><span id="iosStep2">اختر <strong>"إضافة إلى الشاشة الرئيسية"</strong></span></div>
+      <div class="ios-step"><div class="ios-step-num">3</div><span id="iosStep3">اضغط <strong>"إضافة"</strong> في الأعلى</span></div>
+    </div>
+    <button class="ios-guide-close" onclick="$('iosGuide').classList.remove('on')" id="iosGuideClose">حسناً، فهمت</button>
+  </div>
+</div>
+
+<script>
+/* ==================== TRANSLATIONS ==================== */
+const T={
+  ar:{
+    siteTitle:'<span style="color:var(--sky-light)">المعالج</span> الأسري',
+    siteTagline:'محلل العلاقات الأسرية · المنظور النفسي والإسلامي',
+    lblRel:'نوع العلاقة',lblProblem:'احكيلي عن مشكلتك',
+    tabText:'✏️ كتابة',tabVoice:'🎙️ تسجيل صوتي',
+    placeholder:'اكتب مشكلتك هنا... ما اللي بتحس بيه؟ إيه اللي صاير؟ خد وقتك واحكيلي.',
+    vIdle:'اضغط على الميكروفون للبدء',vRec:'🔴 جاري التسجيل... تكلم الآن',
+    vDone:'✓ تم التسجيل — يمكنك الآن التحليل',vHint:'يعمل على Chrome · اضغط مرة ثانية للإيقاف',
+    vNoSup:'غير مدعوم — استخدم Google Chrome',
+    vErrMic:'يرجى السماح للميكروفون',vErrSpeech:'لم يُكتشف صوت',vErrNet:'خطأ في الشبكة',vErrGen:'خطأ في التسجيل',
+    sendBtn:'تحليل المشكلة ✦',charSuf:' حرف',
+    ls1:'جاري تحليل المشكلة نفسياً وإسلامياً...',
+    ls2:'جاري استخلاص الكلمات المفتاحية...',
+    ls3:'جاري اختيار أفضل توجيه...',
+    ls4:'جاري تجهيز النتائج...',
+    respTitle:'التحليل والحل',
+    bdgDiag:'🔍 التشخيص النفسي',bdgIslam:'📖 الحكمة الإسلامية',
+    bdgSteps:'⚡ خطوات عملية',bdgVideo:'🎬 فيديو مقترح',
+    ytQuery:'جملة البحث:',ytSearchLbl:'ابحث على يوتيوب',ytSearchSub:'حلول نفسية وإسلامية',
+    moodAfterLabel:'كيف تشعر الآن بعد القراءة؟',
+    moodShiftUp:'✨ تحسّن ملحوظ في مزاجك — استمر!',
+    moodShiftSame:'حافظ على الخطوات وستشعر بالتحسن قريباً',
+    moodShiftDown:'لا بأس، التعافي يحتاج وقتاً. خطوة واحدة في اليوم تكفي.',
+    progLabel:'تقدمك في الخطوات',
+    newBtn:'+ مشكلة جديدة',
+    disc:'هذا التحليل للتوجيه العام فقط\nللمشاكل الجسيمة، استشر متخصصاً أو عالماً دينياً',
+    alertEmpty:'من فضلك اكتب أو سجّل المشكلة أولاً',
+    errConn:'حدث خطأ. تأكد من الاتصال وحاول مرة أخرى.',
+    langLabel:'English',themeLight:'Light',themeDark:'Dark',
+    histLabel:'السجل',weeklyLabel:'ملخص الأسبوع',
+    histPanelTitle:'سجل المحادثات',clearHistBtn:'مسح الكل',
+    histEmpty:'لا توجد محادثات سابقة',
+    weeklyPanelTitle:'ملخص الأسبوع',
+    wStatSessions:'جلسة',wStatSteps:'خطوة مكتملة',wStatMood:'متوسط المزاج',
+    wInsights:'ملاحظات الأسبوع',
+    fuTitle:'متابعة مشكلة سابقة',fuBtn:'راجع الآن',
+    recLang:'ar-SA',
+    moodEmojis:['😔','😕','😐','🙂','😊'],
+    moodLabels:['سيء','متعب','عادي','بخير','ممتاز'],
+    followupMsg:(rel,days)=>`قبل ${days} يوم تحدثت عن مشكلة في علاقة "${rel}". هل طبّقت الخطوات؟`,
+    welcomeMsg:'مرحباً بك في المعالج الأسري. هنا يمكنك مشاركة مشاعرك بهدوء، وسأحاول فهمها وتقديم منظور نفسي وإسلامي مع خطوات عملية صغيرة.',
+    reminderMsg:'لديك خطوات غير مكتملة من جلسات سابقة. هل تريد مراجعتها؟',
+    reminderBtn:'عرض',menuLabel:'القائمة',counterLabel:'إظهار عداد الأحرف',
+    guideMenuLabel:'دليل سريع',incogLabel:'وضع المجهول',
+    guideTitle:'دليل المعالج الأسري السريع',
+    guide1:'السجل: يحفظ محادثاتك السابقة ويمكنك العودة إليها.',
+    guide2:'ملخص الأسبوع: يعرض تقدمك وإحصائيات أسبوعية.',
+    guide3:'التسجيل الصوتي: يمكنك التحدث بدلاً من الكتابة.',
+    guide4:'تثبيت الخطوات: احفظ الخطوات المهمة للرجوع إليها.',
+    guide5:'تمرين التأمل: دوّن أفكارك بعد التحليل.',
+    guide6:'تذكيرات: نذكّرك بالخطوات غير المكتملة.',
+    guide7:'وضع المجهول: جلسة بدون حفظ للخصوصية التامة.',
+    guide8:'وضع الأزمة: يظهر تلقائياً عند اكتشاف كلمات خطرة.',
+    guideClose:'حسناً',
+    pinnedTitle:'📌 خطواتي المحفوظة',
+    reflectionTitle:'🧘 تأمل سريع',
+    reflectionPlaceholder:'اكتب هنا ما تشعر به أو أي فكرة تخطر ببالك...',
+    reflectionSave:'حفظ التأمل',
+    shareBtn:'📋 نسخ الملخص',
+    printBtn:'🖨️ طباعة البطاقة',
+    streakMsg:(n)=>`🔥 ${n} يوم متتالي من التحسن`,
+    duaTitle:'🤲 دعاء للمساعدة',
+    crisisTitle:'يبدو أنك تمر بوقت صعب جداً',
+    crisisText:'إذا كنت في خطر أو تفكر في إيذاء نفسك أو أحد أفراد أسرتك، يرجى التواصل فوراً مع جهات الدعم.',
+    incogOn:'وضع المجهول مفعّل — لن تُحفظ هذه الجلسة',
+    incogOff:'إيقاف',
+  },
+  en:{
+    siteTitle:'<span style="color:var(--sky-light)">Family</span> Therapist',
+    siteTagline:'Family Relationship Analyzer · Psychological & Islamic Perspective',
+    lblRel:'Relationship Type',lblProblem:'Tell me about your problem',
+    tabText:'✏️ Write',tabVoice:'🎙️ Voice',
+    placeholder:'Describe your problem here... What are you feeling? What is happening? Take your time.',
+    vIdle:'Tap the microphone to start',vRec:'🔴 Recording... Speak now',
+    vDone:'✓ Recorded — you can now analyze',vHint:'Works on Chrome · Tap again to stop',
+    vNoSup:'Not supported — use Google Chrome',
+    vErrMic:'Please allow microphone access',vErrSpeech:'No speech detected',vErrNet:'Network error',vErrGen:'Recording error',
+    sendBtn:'Analyze Problem ✦',charSuf:' chars',
+    ls1:'Analyzing the problem psychologically & Islamically...',
+    ls2:'Extracting key themes...',
+    ls3:'Selecting best guidance...',
+    ls4:'Preparing results...',
+    respTitle:'Analysis & Solution',
+    bdgDiag:'🔍 Psychological Diagnosis',bdgIslam:'📖 Islamic Wisdom',
+    bdgSteps:'⚡ Practical Steps',bdgVideo:'🎬 Suggested Video',
+    ytQuery:'Search query:',ytSearchLbl:'Search on YouTube',ytSearchSub:'Psychological & Islamic solutions',
+    moodAfterLabel:'How do you feel after reading?',
+    moodShiftUp:'✨ Your mood improved — keep going!',
+    moodShiftSame:'Keep applying the steps and you will feel better soon.',
+    moodShiftDown:"It's okay — recovery takes time. One step a day is enough.",
+    progLabel:'Your progress on steps',
+    newBtn:'+ New Problem',
+    disc:'This analysis is for general guidance only\nFor serious issues, consult a specialist or Islamic scholar',
+    alertEmpty:'Please write or record your problem first',
+    errConn:'Connection error. Check your internet and try again.',
+    langLabel:'عربي',themeLight:'Light',themeDark:'Dark',
+    histLabel:'History',weeklyLabel:'Weekly Summary',
+    histPanelTitle:'Conversation History',clearHistBtn:'Clear All',
+    histEmpty:'No previous conversations',
+    weeklyPanelTitle:'Weekly Summary',
+    wStatSessions:'Sessions',wStatSteps:'Steps Done',wStatMood:'Avg Mood',
+    wInsights:'Week Insights',
+    fuTitle:'Follow-up on a previous problem',fuBtn:'Review Now',
+    recLang:'en-US',
+    moodEmojis:['😔','😕','😐','🙂','😊'],
+    moodLabels:['Bad','Tired','Okay','Good','Great'],
+    followupMsg:(rel,days)=>`${days} days ago you discussed a problem in your "${rel}" relationship. Did you apply the steps?`,
+    welcomeMsg:'Welcome to Family Therapist. Here you can share your feelings calmly, and I will try to understand them and provide a psychological and Islamic perspective with small practical steps.',
+    reminderMsg:'You have incomplete steps from previous sessions. Would you like to review them?',
+    reminderBtn:'View',menuLabel:'Menu',counterLabel:'Show character counter',
+    guideMenuLabel:'Quick Guide',incogLabel:'Incognito Mode',
+    guideTitle:'Family Therapist Quick Guide',
+    guide1:'History: Saves your past conversations so you can return to them.',
+    guide2:'Weekly Summary: Shows your progress and weekly stats.',
+    guide3:'Voice Recording: You can speak instead of typing.',
+    guide4:'Pin Steps: Save important steps for later reference.',
+    guide5:'Reflection Exercise: Write down your thoughts after analysis.',
+    guide6:'Reminders: We remind you of incomplete steps.',
+    guide7:'Incognito Mode: Session without saving for full privacy.',
+    guide8:'Crisis Mode: Appears automatically when danger keywords detected.',
+    guideClose:'Got it',
+    pinnedTitle:'📌 My Saved Steps',
+    reflectionTitle:'🧘 Quick Reflection',
+    reflectionPlaceholder:'Write what you feel or any thought that comes to mind...',
+    reflectionSave:'Save Reflection',
+    shareBtn:'📋 Copy Summary',
+    printBtn:'🖨️ Print Card',
+    streakMsg:(n)=>`🔥 ${n}-day streak`,
+    duaTitle:'🤲 A Prayer for Help',
+    crisisTitle:"It seems you're going through a very difficult time",
+    crisisText:'If you are in danger or thinking of harming yourself or a family member, please contact support services immediately.',
+    incogOn:'Incognito mode on — this session will not be saved',
+    incogOff:'Turn Off',
+  }
+};
+
+/* ==================== DUAS DATABASE ==================== */
+const DUAS={
+  communication:{
+    ar:{text:'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا، وَأَصْلِحْ ذَاتَ بَيْنِنَا',source:'دعاء مأثور'},
+    en:{text:'O Allah, unite our hearts and set right the relations between us.',source:'Reported Du\'a'}
+  },
+  trust:{
+    ar:{text:'رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا',source:'سورة الفرقان: ٧٤'},
+    en:{text:'Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.',source:'Quran 25:74'}
+  },
+  financial:{
+    ar:{text:'اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ',source:'الترمذي'},
+    en:{text:'O Allah, suffice me with what You have allowed instead of what You have forbidden, and make me independent of all others.',source:'Tirmidhi'}
+  },
+  children:{
+    ar:{text:'رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً ۖ إِنَّكَ سَمِيعُ الدُّعَاءِ',source:'سورة آل عمران: ٣٨'},
+    en:{text:'My Lord, grant me from Yourself a good offspring. Indeed, You are the Hearer of supplication.',source:'Quran 3:38'}
+  },
+  respect:{
+    ar:{text:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشِّقَاقِ وَالنِّفَاقِ وَسُوءِ الأَخْلَاقِ',source:'أبو داود'},
+    en:{text:'O Allah, I seek refuge in You from discord, hypocrisy and bad character.',source:'Abu Dawud'}
+  },
+  general:{
+    ar:{text:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',source:'سورة البقرة: ٢٠١'},
+    en:{text:'Our Lord, give us in this world that which is good and in the Hereafter that which is good and protect us from the punishment of the Fire.',source:'Quran 2:201'}
+  }
+};
+
+/* ==================== CRISIS KEYWORDS ==================== */
+const CRISIS_KEYWORDS_AR=['طلاق','خيانة','عنف','ضرب','أذى','إيذاء','انتحار','أقتل','أموت','مشنقة','هرب','اهرب','طردني','شارع','لا مكان'];
+const CRISIS_KEYWORDS_EN=['divorce','violence','abuse','hit','hurt','kill','suicide','die','homeless','ran away','nowhere to go'];
+
+/* ==================== STATE ==================== */
+let lang='ar',theme='dark';
+let selRel='',activeTab='text';
+let recog=null,isRec=false,vText='';
+let currentSessionId=null;
+let currentSteps=[],stepsDone=[];
+let isAnalyzing=false;
+let showCharCounter=false;
+let pinnedSteps=[];
+let reflections={};
+let incognitoMode=false;
+let moodBefore=0;
+
+/* ==================== DB ==================== */
+const DB={
+  sessions:()=>JSON.parse(localStorage.getItem('muslih_sessions')||'[]'),
+  saveSessions:d=>localStorage.setItem('muslih_sessions',JSON.stringify(d)),
+  prefs:()=>JSON.parse(localStorage.getItem('muslih_prefs')||'{}'),
+  savePrefs:d=>localStorage.setItem('muslih_prefs',JSON.stringify(d)),
+  pinned:()=>JSON.parse(localStorage.getItem('muslih_pinned')||'[]'),
+  savePinned:d=>localStorage.setItem('muslih_pinned',JSON.stringify(d)),
+  reflections:()=>JSON.parse(localStorage.getItem('muslih_reflections')||'{}'),
+  saveReflections:d=>localStorage.setItem('muslih_reflections',JSON.stringify(d)),
+  streak:()=>JSON.parse(localStorage.getItem('muslih_streak')||'{"count":0,"lastDate":""}'),
+  saveStreak:d=>localStorage.setItem('muslih_streak',JSON.stringify(d)),
+};
+
+/* ==================== INIT ==================== */
+function init(){
+  const p=DB.prefs();
+  if(p.lang) lang=p.lang;
+  if(p.theme) theme=p.theme;
+  if(p.showCharCounter!==undefined) showCharCounter=p.showCharCounter;
+  pinnedSteps=DB.pinned();
+  reflections=DB.reflections();
+  selRel=document.querySelector('.rel-btn.active').dataset.relAr;
+  applyLang();applyTheme();
+  bindRelButtons();
+  document.getElementById('problemInput').addEventListener('input',function(){
+    if(showCharCounter) $('charC').textContent=this.value.length+T[lang].charSuf;
+    checkCrisisKeywords(this.value);
+  });
+  checkFollowup();
+  updateHistBtn();
+  renderPinnedStrip();
+  checkReminder();
+  updateStreakBadge();
+  setupPWA();
+  checkInstallPrompt();
+  updateBnavBadge();
+  if(!localStorage.getItem('muslih_welcome_closed')) $('welcomeBanner').classList.add('on');
+  loadMicDevices();
+}
+
+/* ==================== STREAK ==================== */
+function updateStreak(){
+  const today=new Date().toDateString();
+  const s=DB.streak();
+  if(s.lastDate===today) return;
+  const yesterday=new Date(Date.now()-86400000).toDateString();
+  if(s.lastDate===yesterday) s.count++;
+  else s.count=1;
+  s.lastDate=today;
+  DB.saveStreak(s);
+  updateStreakBadge();
+}
+function updateStreakBadge(){
+  const s=DB.streak();
+  const wrap=$('streakWrap');
+  if(s.count>=2){
+    wrap.innerHTML=`<span class="streak-badge"><span class="streak-fire">🔥</span>${T[lang].streakMsg(s.count)}</span>`;
+  } else {
+    wrap.innerHTML='';
+  }
+}
+
+/* ==================== CRISIS DETECTION ==================== */
+function checkCrisisKeywords(text){
+  const lower=text.toLowerCase();
+  const keywords=lang==='ar'?CRISIS_KEYWORDS_AR:CRISIS_KEYWORDS_EN;
+  const found=keywords.some(k=>lower.includes(k));
+  const banner=$('crisisBanner');
+  if(found) banner.classList.add('on');
+  else banner.classList.remove('on');
+}
+
+/* ==================== INCOGNITO ==================== */
+function toggleIncognito(){
+  incognitoMode=!incognitoMode;
+  const strip=$('incognitoStrip');
+  const t=T[lang];
+  strip.style.display=incognitoMode?'flex':'none';
+  $('incogText').textContent=t.incogOn;
+  $('incogToggle').textContent=t.incogOff;
+  if(incognitoMode) document.body.classList.add('incognito-active');
+  else document.body.classList.remove('incognito-active');
+  $('menuDropdown').classList.remove('on');
+}
+
+/* ==================== LANG & THEME ==================== */
+function toggleLang(){lang=lang==='ar'?'en':'ar';DB.savePrefs({...DB.prefs(),lang});applyLang();$('menuDropdown').classList.remove('on');}
+function toggleTheme(){theme=theme==='dark'?'light':'dark';DB.savePrefs({...DB.prefs(),theme});applyTheme();$('menuDropdown').classList.remove('on');}
+
+function applyLang(){
+  const t=T[lang],h=document.documentElement;
+  h.setAttribute('lang',lang);h.setAttribute('dir',lang==='ar'?'rtl':'ltr');h.setAttribute('data-lang',lang);
+  $('siteTitle').innerHTML=t.siteTitle;$('siteTagline').textContent=t.siteTagline;
+  $('lblRel').textContent=t.lblRel;$('lblProblem').textContent=t.lblProblem;
+  $('tabTxt').textContent=t.tabText;$('tabVoc').textContent=t.tabVoice;
+  $('problemInput').placeholder=t.placeholder;
+  $('vStatus').textContent=isRec?t.vRec:(vText.trim()?t.vDone:t.vIdle);
+  $('vHint').textContent=t.vHint;$('sendBtn').textContent=t.sendBtn;
+  $('lt1').textContent=t.ls1;$('lt2').textContent=t.ls2;$('lt3').textContent=t.ls3;$('lt4').textContent=t.ls4;
+  $('respTitle').textContent=t.respTitle;$('newBtn').textContent=t.newBtn;$('discText').textContent=t.disc;
+  $('langLabel').textContent=t.langLabel;$('histLabel').textContent=t.histLabel;$('weeklyLabel').textContent=t.weeklyLabel;
+  $('histPanelTitle').textContent=t.histPanelTitle;$('clearHistBtn').textContent=t.clearHistBtn;
+  $('weeklyPanelTitle').textContent=t.weeklyPanelTitle;$('fuTitle').textContent=t.fuTitle;$('fuBtn').textContent=t.fuBtn;
+  $('menuLabel').textContent=t.menuLabel;$('counterLabel').textContent=t.counterLabel;
+  $('guideMenuLabel').textContent=t.guideMenuLabel;$('incogLabel').textContent=t.incogLabel;
+  $('welcomeText').textContent=t.welcomeMsg;$('reminderText').textContent=t.reminderMsg;$('reminderBtn').textContent=t.reminderBtn;
+  $('pinnedTitle').textContent=t.pinnedTitle;$('guideTitle').textContent=t.guideTitle;
+  $('guide1').textContent=t.guide1;$('guide2').textContent=t.guide2;$('guide3').textContent=t.guide3;
+  $('guide4').textContent=t.guide4;$('guide5').textContent=t.guide5;$('guide6').textContent=t.guide6;
+  $('guide7').textContent=t.guide7;$('guide8').textContent=t.guide8;$('guideClose').textContent=t.guideClose;
+  $('crisisTitle').textContent=t.crisisTitle;$('crisisText').textContent=t.crisisText;
+  $('duaTitle').textContent=t.duaTitle;
+  document.querySelectorAll('.rel-txt').forEach(el=>el.textContent=lang==='ar'?el.dataset.ar:el.dataset.en);
+  const ab=document.querySelector('.rel-btn.active');
+  if(ab) selRel=lang==='ar'?ab.dataset.relAr:ab.dataset.relEn;
+  updateStreakBadge();
+  updateBnavLabels();
+}
+
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme',theme);
+  const d=theme==='dark';
+  $('themeIcon').textContent=d?'☀️':'🌙';
+  $('themeLabel').textContent=d?T[lang].themeLight:T[lang].themeDark;
+  updateThemeColorMeta();
+}
+
+/* ==================== MENU ==================== */
+function toggleMenu(){$('menuDropdown').classList.toggle('on');}
+function showGuide(){$('guideModal').classList.add('on');$('menuDropdown').classList.remove('on');}
+function hideGuide(){$('guideModal').classList.remove('on');}
+document.addEventListener('click',e=>{
+  const dd=$('menuDropdown'),btn=$('menuBtn');
+  if(dd&&btn&&!btn.contains(e.target)&&!dd.contains(e.target)) dd.classList.remove('on');
+});
+
+/* ==================== WELCOME ==================== */
+function closeWelcome(){$('welcomeBanner').classList.remove('on');localStorage.setItem('muslih_welcome_closed','1');}
+
+/* ==================== PINNED STEPS ==================== */
+function togglePinStep(stepText,event){
+  event.stopPropagation();
+  const idx=pinnedSteps.indexOf(stepText);
+  if(idx===-1) pinnedSteps.push(stepText);
+  else pinnedSteps.splice(idx,1);
+  DB.savePinned(pinnedSteps);
+  renderPinnedStrip();
+  event.target.classList.toggle('pinned',idx===-1);
+}
+function unpinStep(stepText){
+  pinnedSteps=pinnedSteps.filter(s=>s!==stepText);
+  DB.savePinned(pinnedSteps);
+  renderPinnedStrip();
+  document.querySelectorAll('.pin-btn').forEach(btn=>{
+    const txt=btn.previousElementSibling?.textContent;
+    if(txt===stepText) btn.classList.remove('pinned');
+  });
+}
+function renderPinnedStrip(){
+  const strip=$('pinnedStrip');
+  if(!pinnedSteps.length){strip.classList.remove('on');return;}
+  strip.classList.add('on');
+  $('pinnedList').innerHTML=pinnedSteps.map(s=>
+    `<span class="pinned-item">${esc(s)} <span class="unpin" onclick="unpinStep('${esc(s).replace(/'/g,"\\'")}')">✕</span></span>`
+  ).join('');
+}
+
+/* ==================== REFLECTION ==================== */
+function saveReflection(){
+  if(!currentSessionId) return;
+  const text=$('reflectionInput')?$('reflectionInput').value.trim():'';
+  reflections[currentSessionId]=text;
+  DB.saveReflections(reflections);
+}
+
+/* ==================== SHARE / PRINT ==================== */
+function shareSummary(){
+  const body=$('respBody');
+  if(!body) return;
+  navigator.clipboard.writeText(body.innerText).then(()=>{
+    const btn=document.querySelector('.share-btn');
+    if(btn){const orig=btn.textContent;btn.textContent='✓ تم النسخ';setTimeout(()=>btn.textContent=orig,2000);}
+  }).catch(()=>{});
+}
+
+function printCard(){
+  window.print();
+}
+
+/* ==================== SHOW DUA ==================== */
+function showDua(category){
+  const dua=DUAS[category]||DUAS.general;
+  const d=dua[lang]||dua.ar;
+  $('duaText').textContent=d.text;
+  $('duaSource').textContent=d.source;
+  $('duaCard').classList.add('on');
+}
+
+/* ==================== EXPORT PDF ==================== */
+function exportHistoryPDF(){
+  const sessions=DB.sessions();
+  if(!sessions.length){alert(lang==='ar'?'لا توجد جلسات':'No sessions');return;}
+  const w=window.open('','_blank');
+  let c=`<html><head><title>${lang==='ar'?'سجل المعالج الأسري':'Family Therapist History'}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap');
+    body{font-family:'Tajawal','Inter',sans-serif;padding:30px;direction:${lang==='ar'?'rtl':'ltr'};background:#f5f9fc;color:#1a2a3a;}
+    h1{color:#2d7fa8;text-align:center;font-size:1.4rem;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid #d0e8f5;}
+    .session{border:1px solid #cce0f0;background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+    .session-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #eef5fb;}
+    .session-num{font-size:.8rem;font-weight:700;color:#4aa8d8;}
+    .session-date{font-size:.75rem;color:#888;}
+    .session-rel{display:inline-block;background:#e8f4fb;border-radius:6px;padding:2px 8px;font-size:.75rem;color:#2d7fa8;margin-bottom:8px;}
+    .problem-box{background:#f0f7fb;padding:10px 14px;border-radius:8px;margin:10px 0;font-size:.85rem;border-inline-start:3px solid #4aa8d8;}
+    .section-label{font-size:.75rem;font-weight:700;color:#4aa8d8;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.05em;}
+    .q-text{font-family:'Amiri',serif;font-size:1rem;line-height:1.9;color:#1a2a3a;}
+    .steps-list{padding-inline-start:20px;margin:6px 0;}
+    .steps-list li{margin-bottom:5px;font-size:.83rem;color:#2a3a4a;}
+    .prog{display:inline-block;background:#e0f5eb;border-radius:6px;padding:3px 10px;font-size:.74rem;color:#3a9a5a;margin-top:8px;}
+    footer{text-align:center;font-size:.72rem;color:#aaa;margin-top:30px;padding-top:16px;border-top:1px solid #ddd;}
+  </style></head><body>
+  <h1>${lang==='ar'?'سجل جلسات المعالج الأسري':'Family Therapist Session History'}</h1>`;
+  sessions.forEach((s,idx)=>{
+    const d=new Date(s.date).toLocaleString(lang==='ar'?'ar-EG':'en-US',{dateStyle:'full',timeStyle:'short'});
+    const at=s.analysisText||'';
+    const diag=extr(at,'DIAG');const ayah=extr(at,'AYAH');const src=extr(at,'SOURCE');const islam=extr(at,'ISLAM');
+    const stepsRaw=extr(at,'STEPS');
+    const stepsList=stepsRaw.split('\n').filter(l=>l.startsWith('-')).map(l=>l.replace(/^-\s*/,''));
+    const done=(s.stepsDone||[]).filter(Boolean).length,total=(s.stepsDone||[]).length;
+    c+=`<div class="session">
+      <div class="session-header">
+        <span class="session-num">${lang==='ar'?'جلسة':'Session'} #${idx+1}</span>
+        <span class="session-date">${esc(d)}</span>
+      </div>
+      <span class="session-rel">${esc(s.rel)}</span>
+      <div class="problem-box">${esc(s.problem)}</div>
+      <div class="section-label">${T[lang].bdgDiag}</div><p>${esc(diag)}</p>
+      <div class="section-label">${T[lang].bdgIslam}</div>
+      <div class="q-text">${esc(ayah)}</div><p style="font-size:.75rem;color:#888;">${esc(src)}</p>
+      <p>${esc(islam)}</p>
+      ${stepsList.length?`<div class="section-label">${T[lang].bdgSteps}</div><ul class="steps-list">${stepsList.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>${total>0?`<span class="prog">⚡ ${done}/${total}</span>`:''}`:''}
+    </div>`;
+  });
+  c+=`<footer>${esc(T[lang].disc)}</footer></body></html>`;
+  w.document.write(c);w.document.close();w.print();
+}
+
+/* ==================== REMINDER ==================== */
+function checkReminder(){
+  const sessions=DB.sessions();
+  const incomplete=sessions.find(s=>(s.stepsDone||[]).length>0&&(s.stepsDone||[]).filter(Boolean).length<(s.stepsDone||[]).length);
+  $('reminderBanner').classList.toggle('on',!!incomplete);
+}
+function openReminder(){
+  const sessions=DB.sessions();
+  const first=sessions.find(s=>(s.stepsDone||[]).length>0&&(s.stepsDone||[]).filter(Boolean).length<(s.stepsDone||[]).length);
+  if(first) loadSession(first.id);
+  $('reminderBanner').classList.remove('on');
+}
+
+/* ==================== UPDATE HIST BTN ==================== */
+function updateHistBtn(){
+  const sessions=DB.sessions();
+  $('histBtn').classList.toggle('history-btn-active',sessions.length>0);
+  const needsFollowup=sessions.filter(s=>{
+    const total=(s.stepsDone||[]).length,done=(s.stepsDone||[]).filter(Boolean).length;
+    return !s.followedUp&&total>0&&done<total;
+  }).length;
+  const notif=$('histNotif');
+  notif.textContent=needsFollowup;
+  notif.style.display=needsFollowup>0?'inline':'none';
+  updateBnavBadge();
+}
+
+/* ==================== REL BUTTONS ==================== */
+function selectRel(btn){
+  document.querySelectorAll('.rel-btn').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  selRel=lang==='ar'?btn.dataset.relAr:btn.dataset.relEn;
+}
+
+function bindRelButtons(){
+  document.querySelectorAll('.rel-btn').forEach(b=>{
+    b.addEventListener('click',()=>selectRel(b));
+  });
+}
+
+/* ==================== TABS & VOICE ==================== */
+function switchTab(tab){
+  activeTab=tab;
+  $('tabTxt').classList.toggle('active',tab==='text');
+  $('tabVoc').classList.toggle('active',tab==='voice');
+  $('txtPane').classList.toggle('off',tab!=='text');
+  $('vocPane').classList.toggle('on',tab==='voice');
+  if(tab==='voice'){
+    // Check support immediately
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){
+      $('vStatus').textContent=T[lang].vNoSup;
+      $('vStatus').style.color='var(--red)';
+      $('vHint').textContent=lang==='ar'
+        ?'⚠ يعمل فقط على Google Chrome — جرّب الكتابة بدلاً من ذلك'
+        :'⚠ Only works on Google Chrome — try typing instead';
+      $('micBtn').disabled=true;
+      $('micBtn').style.opacity='0.4';
+    } else {
+      $('vStatus').style.color='';
+      $('micBtn').disabled=false;
+      $('micBtn').style.opacity='';
+      loadMicDevices();
+    }
+  }
+}
+async function loadMicDevices(){
+  try{
+    await navigator.mediaDevices.getUserMedia({audio:true});
+    const devices=await navigator.mediaDevices.enumerateDevices();
+    const inputs=devices.filter(d=>d.kind==='audioinput');
+    const sel=$('micSelect');sel.innerHTML='';
+    inputs.forEach((d,i)=>{const o=document.createElement('option');o.value=d.deviceId;o.textContent=d.label||`${lang==='ar'?'ميكروفون':'Mic'} ${i+1}`;sel.appendChild(o);});
+    $('micSelector').style.display=inputs.length>0?'flex':'none';
+  }catch(e){$('micSelector').style.display='none';}
+}
+function toggleRec(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){
+    $('vStatus').textContent=T[lang].vNoSup;
+    $('vStatus').style.color='var(--red)';
+    $('vHint').textContent=lang==='ar'?'⚠ متصفحك لا يدعم التسجيل الصوتي. استخدم Google Chrome على الكمبيوتر.':'⚠ Your browser does not support voice. Use Google Chrome on desktop.';
+    return;
+  }
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    $('vStatus').textContent=T[lang].vErrMic;
+    return;
+  }
+  if(isRec) stopRec();
+  else{vText='';$('vTranscript').textContent='';$('vTranscript').classList.remove('on');$('vStatus').style.color='';startRec(SR);}
+}
+async function startRec(SR){
+  try{
+    // Request mic permission first
+    await navigator.mediaDevices.getUserMedia({audio:true});
+  }catch(e){
+    $('vStatus').textContent=T[lang].vErrMic;
+    $('vStatus').style.color='var(--red)';
+    $('vHint').textContent=lang==='ar'
+      ?'اسمح للمتصفح باستخدام الميكروفون من إعدادات الموقع'
+      :'Allow microphone access in your browser site settings';
+    return;
+  }
+  try{
+    recog=new SR();
+    recog.lang=T[lang].recLang;
+    recog.continuous=true;
+    recog.interimResults=true;
+    recog.onstart=()=>{
+      isRec=true;
+      $('micBtn').classList.add('rec');$('micBtn').textContent='⏹️';
+      $('micRing').classList.add('rec');
+      $('vStatus').textContent=T[lang].vRec;
+      $('vStatus').style.color='var(--red)';
+      $('vStatus').classList.add('rec');
+    };
+    recog.onresult=(e)=>{
+      let interim='';
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const t=e.results[i][0].transcript;
+        if(e.results[i].isFinal) vText+=t+' ';
+        else interim+=t;
+      }
+      const d=(vText+interim).trim();
+      const el=$('vTranscript');el.textContent=d;el.classList.toggle('on',d.length>0);
+      if(showCharCounter) $('charC').textContent=d.length+T[lang].charSuf;
+      checkCrisisKeywords(d);
+    };
+    recog.onerror=(e)=>{
+      const m={'not-allowed':T[lang].vErrMic,'no-speech':T[lang].vErrSpeech,'network':T[lang].vErrNet};
+      $('vStatus').textContent=m[e.error]||T[lang].vErrGen;
+      $('vStatus').style.color='var(--red)';
+      stopRec();
+    };
+    recog.onend=()=>{if(isRec)stopRec();};
+    recog.start();
+  }catch(e){
+    $('vStatus').textContent=T[lang].vErrGen;
+    $('vStatus').style.color='var(--red)';
+  }
+}
+function stopRec(){
+  isRec=false;
+  try{if(recog)recog.stop();}catch(e){}
+  $('micBtn').classList.remove('rec');$('micBtn').textContent='🎙️';
+  $('micRing').classList.remove('rec');
+  $('vStatus').classList.remove('rec');
+  $('vStatus').style.color='';
+  $('vStatus').textContent=vText.trim()?T[lang].vDone:T[lang].vIdle;
+}
+function getProblem(){return activeTab==='text'?$('problemInput').value.trim():vText.trim()||$('vTranscript').textContent.trim();}
+
+/* ==================== LOAD STEPS ==================== */
+function setLS(step){
+  for(let i=1;i<=4;i++){
+    const d=$('ld'+i),t=$('lt'+i);
+    if(i<step){d.className='dot done';t.className='lst done';}
+    else if(i===step){d.className='dot active';t.className='lst active';}
+    else{d.className='dot';t.className='lst';}
+  }
+}
+
+/* ==================== ESCAPE ==================== */
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+
+/* ==================== SMART ANALYSIS ==================== */
+function detectCategory(problem){
+  const lower=problem.toLowerCase();
+  const keywords={
+    communication:['تواصل','كلام','حوار','نقاش','صمت','فهم','تجاهل','communication','talk','silence','ignore','understand'],
+    trust:['ثقة','خيانة','كذب','غدر','شك','trust','betrayal','lie','doubt'],
+    financial:['مال','فلوس','مصروف','دين','قرض','بخل','تبذير','money','financial','debt','spend'],
+    children:['أبناء','أولاد','تربية','طفل','مراهق','مدرسة','children','kids','parenting','teen'],
+    respect:['احترام','إهانة','تقدير','استخفاف','respect','insult','appreciation','disrespect'],
+  };
+  for(let [cat,words] of Object.entries(keywords)){
+    if(words.some(w=>lower.includes(w))) return cat;
+  }
+  return 'general';
+}
+
+function smartAnalysis(problem,rel,lang){
+  const isAr=lang==='ar';
+  const cat=detectCategory(problem);
+  if(isAr){
+    switch(cat){
+      case 'communication':return `###DIAG###\nيبدو أن المشكلة الأساسية تتعلق بسوء الفهم أو ضعف التواصل. في علم النفس، يُعرف هذا بـ "فجوة التواصل" حيث يتراكم سوء الفهم مع الوقت مما يؤدي إلى برود عاطفي تدريجي. كثيراً ما يتحدث كل طرف لكن لا يُسمع، وهذا يخلق دوامة من الإحباط.\n###END_DIAG###\n###AYAH###\n"وَقُل لِّعِبَادِي يَقُولُوا الَّتِي هِيَ أَحْسَنُ"\n###END_AYAH###\n###SOURCE###\nسورة الإسراء، آية 53\n###END_SOURCE###\n###ISLAM###\nالإسلام يحث على الكلمة الطيبة والحوار بالحسنى. النبي ﷺ قال: "ما كان الرفق في شيء إلا زانه". حاول أن تبدأ بحديث إيجابي وتجنب اللوم المباشر.\n###END_ISLAM###\n###STEPS###\n- خصص 10 دقائق يومياً للاستماع فقط للطرف الآخر دون مقاطعة.\n- استخدم عبارات "أنا أشعر..." بدلاً من "أنت دائماً...".\n- حدد وقتاً أسبوعياً للحديث عن المشاعر بعيداً عن المشاكل اليومية.\n###END_STEPS###\n###YTQUERY###\nكيفية تحسين التواصل مع ${rel} في الإسلام\n###END_YTQUERY###`;
+      case 'trust':return `###DIAG###\nالخيانة أو فقدان الثقة يسبب جرحاً عميقاً في النفس. نفسياً، يحتاج بناء الثقة إلى وقت طويل والتزام يومي بالشفافية. الشك المستمر يستنزف الطاقة ويؤثر على الصحة النفسية لكلا الطرفين.\n###END_DIAG###\n###AYAH###\n"إِنَّ اللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا الْأَمَانَاتِ إِلَىٰ أَهْلِهَا"\n###END_AYAH###\n###SOURCE###\nسورة النساء، آية 58\n###END_SOURCE###\n###ISLAM###\nالأمانة والصدق هما أساس العلاقات في الإسلام. يجب على كل طرف أن يلتزم بالوضوح والصدق حتى في الأمور الصغيرة، فإن الصدق يبني جسراً قوياً للثقة.\n###END_ISLAM###\n###STEPS###\n- تحدث بصراحة عن مشاعرك دون إلقاء اتهامات.\n- اطلب توضيحات صغيرة يومية لبناء الثقة تدريجياً.\n- استشر مستشاراً أسرياً للمساعدة في تجاوز الأزمة.\n###END_STEPS###\n###YTQUERY###\nكيفية استعادة الثقة بعد الخيانة في العلاقة الزوجية\n###END_YTQUERY###`;
+      case 'financial':return `###DIAG###\nالخلافات المالية من أكثر أسباب التوتر الأسري شيوعاً. غالباً ما تخفي هذه الخلافات احتياجات عاطفية غير مُرضاة، فالمال في العلاقات يرمز للأمان والاحترام والقوة.\n###END_DIAG###\n###AYAH###\n"وَلَا تَجْعَلْ يَدَكَ مَغْلُولَةً إِلَىٰ عُنُقِكَ وَلَا تَبْسُطْهَا كُلَّ الْبَسْطِ"\n###END_AYAH###\n###SOURCE###\nسورة الإسراء، آية 29\n###END_SOURCE###\n###ISLAM###\nالاعتدال في الإنفاق هو منهج الإسلام. النفقة واجبة ومحددة شرعاً، والتشاور في الميزانية يعزز الثقة المتبادلة.\n###END_ISLAM###\n###STEPS###\n- اجلسوا معاً لوضع ميزانية شهرية واضحة ومكتوبة.\n- حددوا أولويات الإنفاق وتنازلوا عن الكماليات مؤقتاً.\n- افتحوا حساباً مشتركاً للنفقات الأساسية وحساباً شخصياً لكل طرف.\n###END_STEPS###\n###YTQUERY###\nكيفية إدارة الخلافات المالية في الأسرة المسلمة\n###END_YTQUERY###`;
+      case 'children':return `###DIAG###\nتربية الأبناء تتطلب صبراً وتفهماً واتفاقاً بين الوالدين. قد يكون هناك اختلاف في أساليب التربية أو قلق على مستقبل الأبناء، وكلا الأمرين طبيعي لكنهما يحتاجان للتوحيد والتناسق.\n###END_DIAG###\n###AYAH###\n"يَا أَيُّهَا الَّذِينَ آمَنُوا قُوا أَنفُسَكُمْ وَأَهْلِيكُمْ نَارًا"\n###END_AYAH###\n###SOURCE###\nسورة التحريم، آية 6\n###END_SOURCE###\n###ISLAM###\nالتربية بالقدوة الحسنة والموعظة الحكيمة هي أساس تربية الأبناء في الإسلام. النبي ﷺ كان قدوة حية في التعامل مع أهله وأبنائه بالرفق والحب.\n###END_ISLAM###\n###STEPS###\n- خصص وقتاً يومياً للعب والحديث مع أبنائك بعيداً عن الشاشات.\n- اتفق مع شريكك على قواعد تربوية موحدة ومكتوبة.\n- اقرأ كتاباً واحداً شهرياً عن التربية الإسلامية الحديثة.\n###END_STEPS###\n###YTQUERY###\nأساليب التربية الإسلامية الحديثة للأبناء مع علم النفس\n###END_YTQUERY###`;
+      case 'respect':return `###DIAG###\nغياب الاحترام المتبادل يؤدي إلى جروح نفسية عميقة. كل طرف يشعر بأنه غير مُقدَّر، وهذا يخلق دوامة من ردود الفعل الدفاعية والهجوم المتبادل.\n###END_DIAG###\n###AYAH###\n"وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ حُسْنًا"\n###END_AYAH###\n###SOURCE###\nسورة العنكبوت، آية 8\n###END_SOURCE###\n###ISLAM###\nالبر والإحسان في العلاقات واجب ديني. النبي ﷺ قال: "خيركم خيركم لأهله". الاحترام ليس مكافأة، بل حق أصيل لكل إنسان.\n###END_ISLAM###\n###STEPS###\n- اكتب قائمة بالصفات التي تقدرها في الطرف الآخر وشاركه بها.\n- تجنب الكلمات الجارحة حتى في لحظات الغضب.\n- مارس قول "شكراً" و"أقدر فيك..." يومياً.\n###END_STEPS###\n###YTQUERY###\nكيفية تعزيز الاحترام المتبادل في العلاقات الأسرية\n###END_YTQUERY###`;
+      default:return `###DIAG###\nيبدو أنك تواجه ضغطاً نفسياً في علاقتك مع ${rel}. لا تقلق، أول خطوة هي الاعتراف بالمشكلة والرغبة في الحل. القلق والتوتر العلائقي يؤثران على جميع جوانب الحياة.\n###END_DIAG###\n###AYAH###\n"فَبِمَا رَحْمَةٍ مِّنَ اللَّهِ لِنتَ لَهُمْ ۖ وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لَانفَضُّوا مِنْ حَوْلِكَ"\n###END_AYAH###\n###SOURCE###\nسورة آل عمران، آية 159\n###END_SOURCE###\n###ISLAM###\nالرفق واللين هما مفتاح القلوب. حاول أن تتعامل مع من تحب برحمة وتفهم، فإن الرفق ما كان في شيء إلا زانه.\n###END_ISLAM###\n###STEPS###\n- خذ نفساً عميقاً وحاول الكتابة عن مشاعرك أولاً في ورقة خاصة.\n- تحدث مع الشخص المعني بهدوء واختر الوقت المناسب.\n- إذا لزم الأمر، اطلب مساعدة وسيط موثوق من العائلة أو متخصص.\n###END_STEPS###\n###YTQUERY###\nحل المشاكل الأسرية بطريقة إسلامية ونفسية\n###END_YTQUERY###`;
+    }
+  } else {
+    switch(cat){
+      case 'communication':return `###DIAG###\nThe core issue seems to be miscommunication or lack of effective dialogue. Psychologically, this creates emotional distance over time. Both parties may be speaking but not truly hearing each other, creating a cycle of frustration.\n###END_DIAG###\n###AYAH###\n"And speak to people good [words]"\n###END_AYAH###\n###SOURCE###\nSurah Al-Baqarah, Verse 83\n###END_SOURCE###\n###ISLAM###\nIslam emphasizes kind speech and dialogue. The Prophet ﷺ said: "Gentleness is not in something except that it beautifies it." Start with positive words and avoid direct blame.\n###END_ISLAM###\n###STEPS###\n- Set aside 10 minutes daily just to listen without interrupting.\n- Use "I feel..." statements instead of "You always...".\n- Schedule weekly time to talk about feelings away from daily stress.\n###END_STEPS###\n###YTQUERY###\nhow to improve communication in Islamic family relationships\n###END_YTQUERY###`;
+      case 'trust':return `###DIAG###\nBetrayal or loss of trust causes deep wounds. Rebuilding trust requires time and consistent daily transparency. Constant doubt drains energy and affects the mental health of both parties.\n###END_DIAG###\n###AYAH###\n"Indeed, Allah commands you to render trusts to whom they are due"\n###END_AYAH###\n###SOURCE###\nSurah An-Nisa, Verse 58\n###END_SOURCE###\n###ISLAM###\nTrust and honesty are the foundation of relationships in Islam. Both parties must commit to clarity and truthfulness, even in small matters.\n###END_ISLAM###\n###STEPS###\n- Speak openly about your feelings without accusations.\n- Ask for small daily clarifications to gradually rebuild trust.\n- Consult a family counselor to help navigate the crisis together.\n###END_STEPS###\n###YTQUERY###\nhow to rebuild trust after betrayal in a relationship\n###END_YTQUERY###`;
+      case 'financial':return `###DIAG###\nFinancial disagreements are one of the most common sources of family tension. Often they hide unmet emotional needs — money in relationships symbolizes security, respect, and power.\n###END_DIAG###\n###AYAH###\n"And do not make your hand [as] chained to your neck or extend it completely"\n###END_AYAH###\n###SOURCE###\nSurah Al-Isra, Verse 29\n###END_SOURCE###\n###ISLAM###\nModeration in spending is the Islamic way. Consulting on the budget builds mutual trust and respects each person's needs.\n###END_ISLAM###\n###STEPS###\n- Sit together to create a clear monthly budget in writing.\n- Prioritize spending and temporarily give up luxuries.\n- Open a joint account for essentials and personal accounts for autonomy.\n###END_STEPS###\n###YTQUERY###\nhow to manage financial conflicts in a Muslim family\n###END_YTQUERY###`;
+      case 'children':return `###DIAG###\nParenting requires patience, understanding, and agreement between parents. Differences in parenting styles or anxiety about children's future are normal but need to be unified and consistent.\n###END_DIAG###\n###AYAH###\n"O you who have believed, protect yourselves and your families from a Fire"\n###END_AYAH###\n###SOURCE###\nSurah At-Tahrim, Verse 6\n###END_SOURCE###\n###ISLAM###\nLeading by example and wise counsel is the foundation of Islamic parenting. The Prophet ﷺ was a living example of gentleness and love with his family.\n###END_ISLAM###\n###STEPS###\n- Spend daily screen-free time playing and talking with your children.\n- Agree with your partner on unified, written parenting rules.\n- Read one book monthly on modern Islamic parenting.\n###END_STEPS###\n###YTQUERY###\nmodern Islamic parenting techniques children psychology\n###END_YTQUERY###`;
+      case 'respect':return `###DIAG###\nLack of mutual respect causes deep emotional wounds. Each party feels undervalued, creating a defensive cycle of mutual attacks.\n###END_DIAG###\n###AYAH###\n"And We have enjoined upon man goodness to parents"\n###END_AYAH###\n###SOURCE###\nSurah Al-Ankabut, Verse 8\n###END_SOURCE###\n###ISLAM###\nKindness and good treatment are the basis of all relationships. The Prophet ﷺ said: "The best of you is the best to his family." Respect is not a reward — it is a right.\n###END_ISLAM###\n###STEPS###\n- Write a list of qualities you appreciate in the other person and share it.\n- Avoid hurtful words even in moments of anger.\n- Practice saying "thank you" and "I appreciate..." daily.\n###END_STEPS###\n###YTQUERY###\nhow to foster mutual respect in family relationships\n###END_YTQUERY###`;
+      default:return `###DIAG###\nIt seems you are facing psychological stress in your relationship with ${rel}. Don't worry — acknowledging the problem and wanting a solution is the first step. Relational anxiety affects all areas of life.\n###END_DIAG###\n###AYAH###\n"So by mercy from Allah, you were lenient with them. And if you had been rude and harsh in heart, they would have disbanded from about you."\n###END_AYAH###\n###SOURCE###\nSurah Ali 'Imran, Verse 159\n###END_SOURCE###\n###ISLAM###\nGentleness and softness are keys to hearts. Try to deal with your loved one with mercy and understanding.\n###END_ISLAM###\n###STEPS###\n- Take a deep breath and try writing down your feelings in a private note.\n- Talk to the person involved calmly and choose the right moment.\n- If needed, seek help from a trusted family mediator or specialist.\n###END_STEPS###\n###YTQUERY###\nislamicислamic solutions for family problems psychology\n###END_YTQUERY###`;
+    }
+  }
+}
+
+/* ==================== ANALYZE ==================== */
+async function analyze(){
+  const problem=getProblem();
+  if(!problem){alert(T[lang].alertEmpty);return;}
+  if(isAnalyzing) return;
+  isAnalyzing=true;
+  $('loadCard').classList.add('on');$('respCard').classList.remove('on');
+  $('sendBtn').disabled=true;$('newBtn').style.display='none';
+  setLS(1);currentSteps=[];stepsDone=[];
+
+  const cat=detectCategory(problem);
+  let analysisText='';
+
+  try{
+    setLS(1);await new Promise(r=>setTimeout(r,400));
+    setLS(2);await new Promise(r=>setTimeout(r,300));
+    setLS(3);
+
+    try{
+      analysisText=await analyzeWithClaude(problem,selRel,lang);
+    }catch(e){
+      console.warn('Claude API failed, fallback:',e.message);
+      analysisText='';
+    }
+
+    // Validate response has required tags, fallback if not
+    if(!analysisText||!analysisText.includes('###DIAG###')){
+      analysisText=smartAnalysis(problem,selRel,lang);
+    }
+
+    setLS(4);await new Promise(r=>setTimeout(r,200));
+
+    const ytQuery=extr(analysisText,'YTQUERY');
+    renderResponse(analysisText,ytQuery,problem);
+    if(!incognitoMode) saveSession(problem,analysisText,cat);
+
+    $('loadCard').classList.remove('on');$('respCard').classList.add('on');
+    $('newBtn').style.display='block';$('sendBtn').disabled=false;
+    isAnalyzing=false;
+
+    setTimeout(()=>showDua(cat),600);
+    if(!incognitoMode){updateHistBtn();updateStreak();}
+    $('respCard').scrollIntoView({behavior:'smooth',block:'start'});
+
+  }catch(e){
+    console.error('analyze error:',e);
+    // Last resort — use fallback and show result anyway
+    try{
+      if(!analysisText||!analysisText.includes('###DIAG###')){
+        analysisText=smartAnalysis(problem,selRel,lang);
+      }
+      const ytQuery=extr(analysisText,'YTQUERY');
+      renderResponse(analysisText,ytQuery,problem);
+      if(!incognitoMode) saveSession(problem,analysisText,cat);
+      $('loadCard').classList.remove('on');$('respCard').classList.add('on');
+      $('newBtn').style.display='block';
+    }catch(e2){
+      $('loadCard').classList.remove('on');
+      alert(T[lang].errConn);
+    }
+    $('sendBtn').disabled=false;
+    isAnalyzing=false;
+  }
+}
+
+/* ==================== RENDER RESPONSE ==================== */
+function renderResponse(analysisText,ytQueryText,problem){
+  const t=T[lang];
+  const diag=esc(extr(analysisText,'DIAG'));
+  const ayah=esc(extr(analysisText,'AYAH'));
+  const src=esc(extr(analysisText,'SOURCE'));
+  const islam=esc(extr(analysisText,'ISLAM'));
+  const stepsRaw=extr(analysisText,'STEPS');
+
+  currentSteps=stepsRaw.split('\n').map(s=>s.trim()).filter(s=>s.startsWith('-')).map(s=>s.replace(/^-\s*/,'').trim()).filter(Boolean);
+  stepsDone=new Array(currentSteps.length).fill(false);
+
+  const stepsHTML=currentSteps.length>0
+    ?`<ul class="steps-list" id="stepsList">`+currentSteps.map((s,i)=>{
+        const isPinned=pinnedSteps.includes(s);
+        return `<li class="step-item" id="si${i}" onclick="toggleStep(${i})"><div class="step-check" id="sc${i}">✓</div><div class="step-txt">${esc(s)}</div><button class="pin-btn ${isPinned?'pinned':''}" onclick="togglePinStep('${esc(s).replace(/'/g,"\\'")}',event)" title="${lang==='ar'?'تثبيت':'Pin'}">📌</button></li>`;
+      }).join('')+`</ul><div class="progress-wrap"><div class="progress-bar" id="progBar" style="width:0%"></div></div><div class="progress-label" id="progLabel">${t.progLabel}: 0/${currentSteps.length}</div>`
+    :`<p class="sec-text">${esc(stepsRaw)}</p>`;
+
+  const savedRef=reflections[currentSessionId]||'';
+  const reflectionHTML=`<div class="reflection-box"><div class="reflection-title">${t.reflectionTitle}</div><textarea class="reflection-input" id="reflectionInput" placeholder="${t.reflectionPlaceholder}">${esc(savedRef)}</textarea><button class="reflection-save" onclick="saveReflection()">${t.reflectionSave}</button></div>`;
+
+  const moodHTML=`<div class="mood-section"><div class="mood-label">${t.moodAfterLabel}</div><div class="mood-btns">${t.moodEmojis.map((em,i)=>`<button class="mood-btn" onclick="setMoodAfter(${i+1})" id="mb${i}"><span class="mood-emoji">${em}</span><span class="mood-lbl">${t.moodLabels[i]}</span></button>`).join('')}</div><div class="mood-shift" id="moodShift"></div></div>`;
+
+  const q=encodeURIComponent(ytQueryText||`${selRel} ${t.ytSearchSub}`);
+  const ytHTML=`<a href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener" class="yt-fallback"><span style="font-size:1.7rem">▶️</span><div><div style="color:#ff8888;font-weight:600;font-size:.86rem;margin-bottom:3px;">${t.ytSearchLbl}</div><div style="color:var(--muted);font-size:.76rem;">${esc(ytQueryText)||esc(selRel)+' — '+t.ytSearchSub}</div></div></a>`;
+
+  $('respBody').innerHTML=`
+    <div class="sec"><div class="sec-title"><span class="badge">${t.bdgDiag}</span></div><p class="sec-text">${diag}</p></div>
+    <div class="sec"><div class="sec-title"><span class="badge">${t.bdgIslam}</span></div><div class="q-box"><div class="q-txt">${ayah}</div><div class="q-src">— ${src}</div></div><p class="sec-text" style="margin-top:12px">${islam}</p></div>
+    <div class="sec"><div class="sec-title"><span class="badge w">${t.bdgSteps}</span></div>${stepsHTML}${reflectionHTML}${moodHTML}</div>
+    <div class="sec"><div class="sec-title"><span class="badge w">${t.bdgVideo}</span></div>${ytHTML}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;"><button class="share-btn" onclick="shareSummary()">${t.shareBtn}</button><button class="print-card-btn" onclick="printCard()">${t.printBtn}</button></div></div>`;
+}
+
+/* ==================== MOOD AFTER ==================== */
+function setMoodAfter(val){
+  const t=T[lang];
+  document.querySelectorAll('.mood-btn').forEach((b,i)=>b.classList.toggle('selected',i===val-1));
+  const shift=$('moodShift');shift.classList.add('on');
+  if(val>=4) shift.textContent=t.moodShiftUp;
+  else if(val===3) shift.textContent=t.moodShiftSame;
+  else shift.textContent=t.moodShiftDown;
+  if(currentSessionId){
+    const sessions=DB.sessions();
+    const idx=sessions.findIndex(s=>s.id===currentSessionId);
+    if(idx>=0){sessions[idx].moodAfter=val;DB.saveSessions(sessions);}
+  }
+}
+
+/* ==================== EXTRACT ==================== */
+function extr(text,tag){
+  const re=new RegExp(`###${tag}###\\s*([\\s\\S]*?)\\s*###END_${tag}###`,'i');
+  const m=text.match(re);return m?m[1].trim():'';
+}
+
+/* ==================== TOGGLE STEP ==================== */
+function toggleStep(i){
+  stepsDone[i]=!stepsDone[i];
+  const item=$('si'+i);item.classList.toggle('done',stepsDone[i]);
+  const done=stepsDone.filter(Boolean).length,pct=Math.round(done/stepsDone.length*100);
+  const pb=$('progBar');if(pb)pb.style.width=pct+'%';
+  const pl=$('progLabel');if(pl)pl.textContent=T[lang].progLabel+': '+done+'/'+stepsDone.length;
+  if(currentSessionId&&!incognitoMode){
+    const sessions=DB.sessions();
+    const idx=sessions.findIndex(s=>s.id===currentSessionId);
+    if(idx>=0){sessions[idx].stepsDone=stepsDone;DB.saveSessions(sessions);}
+  }
+}
+
+/* ==================== SAVE SESSION ==================== */
+function saveSession(problem,analysisText,cat){
+  if(incognitoMode) return;
+  const id=Date.now().toString();currentSessionId=id;
+  const sessions=DB.sessions();
+  sessions.unshift({id,date:new Date().toISOString(),rel:selRel,problem,analysisText,cat,stepsDone:[],lang});
+  if(sessions.length>50)sessions.pop();
+  DB.saveSessions(sessions);checkReminder();
+}
+
+/* ==================== HISTORY PANEL ==================== */
+function toggleHistory(){
+  const panel=$('historyPanel');
+  if(panel.classList.contains('on')){panel.classList.remove('on');return;}
+  renderHistory();panel.classList.add('on');$('weeklyPanel').classList.remove('on');
+}
+function renderHistory(){
+  const sessions=DB.sessions(),t=T[lang];
+  if(!sessions.length){$('historyList').innerHTML=`<div class="history-empty">${t.histEmpty}</div>`;return;}
+  $('historyList').innerHTML=sessions.map(s=>{
+    const d=new Date(s.date);
+    const dateStr=d.toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{month:'short',day:'numeric'});
+    const done=(s.stepsDone||[]).filter(Boolean).length,total=(s.stepsDone||[]).length;
+    const needsFollowup=!s.followedUp&&done<total&&(Date.now()-new Date(s.date).getTime())>5*24*3600*1000;
+    return `<div class="hist-item" onclick="loadSession('${esc(s.id)}')">
+      <div class="hist-top"><span class="hist-rel">${esc(s.rel)}</span><span class="hist-date">${esc(dateStr)}</span></div>
+      <div class="hist-problem">${esc(s.problem)}</div>
+      <div class="hist-meta">${total>0?`<span class="hist-prog">⚡ ${done}/${total}</span>`:''}${needsFollowup?`<span class="hist-follow">🔔 ${lang==='ar'?'متابعة':'Follow-up'}</span>`:''}</div>
+    </div>`;
+  }).join('');
+}
+function loadSession(id){
+  const sessions=DB.sessions();const s=sessions.find(x=>x.id===id);if(!s)return;
+  $('historyPanel').classList.remove('on');
+  currentSessionId=id;currentSteps=[];stepsDone=s.stepsDone||[];
+  renderResponse(s.analysisText,'',s.problem);
+  stepsDone.forEach((done,i)=>{if(done){const item=$('si'+i);if(item)item.classList.add('done');}});
+  const done=stepsDone.filter(Boolean).length;
+  const pb=$('progBar');if(pb&&stepsDone.length)pb.style.width=Math.round(done/stepsDone.length*100)+'%';
+  const pl=$('progLabel');if(pl&&stepsDone.length)pl.textContent=T[lang].progLabel+': '+done+'/'+stepsDone.length;
+  $('respCard').classList.add('on');$('newBtn').style.display='block';
+  $('respCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function clearHistory(){
+  if(confirm(lang==='ar'?'هل تريد مسح كل المحادثات؟':'Clear all conversations?')){
+    DB.saveSessions([]);renderHistory();updateHistBtn();$('historyPanel').classList.remove('on');
+  }
+}
+
+/* ==================== WEEKLY SUMMARY ==================== */
+function toggleWeekly(){
+  const panel=$('weeklyPanel');
+  if(panel.classList.contains('on')){panel.classList.remove('on');return;}
+  renderWeekly();panel.classList.add('on');$('historyPanel').classList.remove('on');
+}
+function renderWeekly(){
+  const t=T[lang],sessions=DB.sessions();
+  const weekAgo=Date.now()-7*24*3600*1000;
+  const week=sessions.filter(s=>new Date(s.date).getTime()>=weekAgo);
+  const totalSessions=week.length;
+  const totalSteps=week.reduce((a,s)=>a+(s.stepsDone||[]).filter(Boolean).length,0);
+  const moodVals=week.filter(s=>s.moodAfter>0).map(s=>s.moodAfter);
+  const avgMood=moodVals.length?Math.round(moodVals.reduce((a,b)=>a+b,0)/moodVals.length):0;
+  const avgMoodEmoji=avgMood?T[lang].moodEmojis[avgMood-1]:'—';
+  const relCounts={};
+  week.forEach(s=>{relCounts[s.rel]=(relCounts[s.rel]||0)+1;});
+  const topRel=Object.entries(relCounts).sort((a,b)=>b[1]-a[1])[0];
+  const streak=DB.streak();
+  const insights=[];
+  if(totalSessions>0) insights.push(lang==='ar'?`تحدثت عن ${totalSessions} مشكلة هذا الأسبوع`:`You discussed ${totalSessions} problem${totalSessions>1?'s':''} this week`);
+  if(totalSteps>0) insights.push(lang==='ar'?`أكملت ${totalSteps} خطوة عملية — هذا تقدم حقيقي!`:`You completed ${totalSteps} practical step${totalSteps>1?'s':''} — real progress!`);
+  if(topRel) insights.push(lang==='ar'?`أكثر العلاقات حضوراً: ${topRel[0]}`:`Most discussed: ${topRel[0]}`);
+  if(avgMood>=4) insights.push(lang==='ar'?'مزاجك كان إيجابياً بعد الجلسات — ممتاز':'Your mood was positive after sessions — excellent');
+  if(streak.count>=3) insights.push(lang==='ar'?`🔥 ${streak.count} أيام متتالية من الاستمرار — أنت رائع!`:`🔥 ${streak.count}-day streak — you're on fire!`);
+  if(totalSessions===0) insights.push(lang==='ar'?'لا توجد جلسات هذا الأسبوع بعد':'No sessions this week yet');
+
+  $('weeklyBody').innerHTML=`
+    <div class="weekly-stat-row">
+      <div class="wstat"><div class="wn">${totalSessions}</div><div class="wl">${t.wStatSessions}</div></div>
+      <div class="wstat"><div class="wn">${totalSteps}</div><div class="wl">${t.wStatSteps}</div></div>
+      <div class="wstat"><div class="wn">${avgMoodEmoji}</div><div class="wl">${t.wStatMood}</div></div>
+    </div>
+    <div class="weekly-insights">
+      <div class="lbl" style="margin-bottom:10px">${t.wInsights}</div>
+      ${insights.map(i=>`<div class="wi-item"><div class="wi-dot"></div><span>${i}</span></div>`).join('')}
+    </div>`;
+}
+
+/* ==================== FOLLOW-UP ==================== */
+function checkFollowup(){
+  const sessions=DB.sessions();
+  const fiveDaysAgo=Date.now()-5*24*3600*1000;
+  const old=sessions.find(s=>{
+    const age=Date.now()-new Date(s.date).getTime();
+    const total=(s.stepsDone||[]).length,done=(s.stepsDone||[]).filter(Boolean).length;
+    return age>=fiveDaysAgo&&!s.followedUp&&total>0&&done<total;
+  });
+  if(!old)return;
+  const days=Math.floor((Date.now()-new Date(old.date).getTime())/(24*3600*1000));
+  $('fuText').textContent=T[lang].followupMsg(old.rel,days);
+  $('fuBtn').dataset.sid=old.id;$('followupBanner').classList.add('on');
+}
+function openFollowup(){
+  const sid=$('fuBtn').dataset.sid;
+  if(sid){
+    loadSession(sid);
+    const sessions=DB.sessions();
+    const idx=sessions.findIndex(s=>s.id===sid);
+    if(idx>=0){sessions[idx].followedUp=true;DB.saveSessions(sessions);}
+    $('followupBanner').classList.remove('on');
+  }
+}
+
+/* ==================== VIDEO ==================== */
+function openVid(id,title){
+  $('vidFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+  $('vidModalTitle').textContent=title||'';$('vidModal').classList.add('on');document.body.style.overflow='hidden';
+}
+function closeVid(){$('vidModal').classList.remove('on');$('vidFrame').src='';document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVid();});
+
+/* ==================== RESET ==================== */
+function resetAll(){
+  $('problemInput').value='';
+  if(showCharCounter) $('charC').textContent='0'+T[lang].charSuf;
+  $('vTranscript').textContent='';$('vTranscript').classList.remove('on');
+  $('vStatus').textContent=T[lang].vIdle;
+  vText='';currentSessionId=null;currentSteps=[];stepsDone=[];
+  $('respCard').classList.remove('on');$('newBtn').style.display='none';$('sendBtn').disabled=false;
+  $('duaCard').classList.remove('on');$('crisisBanner').classList.remove('on');
+  isAnalyzing=false;
+  if(isRec)stopRec();switchTab('text');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleCharCounter(){
+  showCharCounter=!showCharCounter;
+  DB.savePrefs({...DB.prefs(),showCharCounter});
+  $('charC').style.display=showCharCounter?'inline':'none';
+  if(showCharCounter) $('charC').textContent=$('problemInput').value.length+T[lang].charSuf;
+  $('menuDropdown').classList.remove('on');
+}
+
+function $(id){return document.getElementById(id);}
+/* ==================== PWA SETUP ==================== */
+
+// Generate SVG icon as data URI
+function generateIcon(size){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <rect width="${size}" height="${size}" rx="${size*0.22}" fill="#090d12"/>
+    <rect x="2" y="2" width="${size-4}" height="${size-4}" rx="${size*0.2}" fill="none" stroke="#4aa8d8" stroke-width="2" opacity="0.5"/>
+    <text x="50%" y="54%" font-size="${size*0.5}" text-anchor="middle" dominant-baseline="middle">🌿</text>
+  </svg>`;
+  return 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
+}
+
+function setupPWA(){
+  // Create and inject manifest
+  const manifest={
+    name:'المعالج الأسري',
+    short_name:'معالج أسري',
+    description:'محلل العلاقات الأسرية - المنظور النفسي والإسلامي',
+    start_url:window.location.href,
+    display:'standalone',
+    orientation:'portrait',
+    background_color:'#090d12',
+    theme_color:'#090d12',
+    lang:'ar',
+    dir:'rtl',
+    icons:[
+      {src:generateIcon(192),sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'},
+      {src:generateIcon(512),sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'},
+    ],
+    categories:['lifestyle','health','education'],
+    screenshots:[],
+  };
+  const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  document.getElementById('manifestLink').href=url;
+
+  // Apple touch icon
+  document.getElementById('appleTouchIcon').href=generateIcon(180);
+
+  // Register service worker
+  if('serviceWorker' in navigator){
+    const swCode=`
+const CACHE='family-therapist-v2';
+const ASSETS=[self.location.pathname];
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
+});
+self.addEventListener('activate',e=>{
+  e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+});
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET') return;
+  e.respondWith(caches.match(e.request).then(cached=>{
+    const network=fetch(e.request).then(r=>{
+      if(r&&r.status===200){const rc=r.clone();caches.open(CACHE).then(c=>c.put(e.request,rc));}
+      return r;
+    }).catch(()=>cached);
+    return cached||network;
+  }));
+});`;
+    const swBlob=new Blob([swCode],{type:'application/javascript'});
+    const swUrl=URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl).catch(()=>{});
+  }
+}
+
+/* ==================== INSTALL PROMPT ==================== */
+let deferredPrompt=null;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isInStandalone=window.matchMedia('(display-mode:standalone)').matches||window.navigator.standalone===true;
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  if(!localStorage.getItem('pwa_install_dismissed')){
+    setTimeout(()=>$('installBanner').classList.add('on'),3000);
+  }
+});
+
+function doInstall(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(r=>{
+      if(r.outcome==='accepted') localStorage.setItem('pwa_installed','1');
+      deferredPrompt=null;
+      $('installBanner').classList.remove('on');
+    });
+  } else if(isIOS){
+    $('installBanner').classList.remove('on');
+    $('iosGuide').classList.add('on');
+  }
+}
+
+function dismissInstall(){
+  $('installBanner').classList.remove('on');
+  localStorage.setItem('pwa_install_dismissed','1');
+}
+
+function checkInstallPrompt(){
+  if(isInStandalone) return; // already installed
+  if(localStorage.getItem('pwa_install_dismissed')) return;
+  if(isIOS&&!localStorage.getItem('pwa_ios_shown')){
+    setTimeout(()=>{
+      $('installBanner').classList.add('on');
+      $('installBtn').textContent=T[lang].iosInstallBtn||'كيفية التثبيت';
+      localStorage.setItem('pwa_ios_shown','1');
+    },3500);
+  }
+}
+
+/* ==================== BOTTOM NAV ==================== */
+function bnavGo(tab){
+  // Update active state
+  ['home','hist','weekly','menu'].forEach(t=>{
+    $('bnav'+t.charAt(0).toUpperCase()+t.slice(1))?.classList.remove('active');
+  });
+
+  if(tab==='home'){
+    $('bnavHome').classList.add('active');
+    $('historyPanel').classList.remove('on');
+    $('weeklyPanel').classList.remove('on');
+    $('menuDropdown').classList.remove('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else if(tab==='history'){
+    $('bnavHist').classList.add('active');
+    $('weeklyPanel').classList.remove('on');
+    $('menuDropdown').classList.remove('on');
+    toggleHistory();
+  } else if(tab==='weekly'){
+    $('bnavWeekly').classList.add('active');
+    $('historyPanel').classList.remove('on');
+    $('menuDropdown').classList.remove('on');
+    toggleWeekly();
+  } else if(tab==='menu'){
+    $('bnavMenu').classList.add('active');
+    $('historyPanel').classList.remove('on');
+    $('weeklyPanel').classList.remove('on');
+    // show as bottom sheet on mobile
+    $('menuDropdown').classList.toggle('on');
+  }
+}
+
+function updateBnavBadge(){
+  const sessions=DB.sessions();
+  const needsFollowup=sessions.filter(s=>{
+    const total=(s.stepsDone||[]).length,done=(s.stepsDone||[]).filter(Boolean).length;
+    return !s.followedUp&&total>0&&done<total;
+  }).length;
+  const badge=$('bnavBadge');
+  if(badge){badge.textContent=needsFollowup;badge.classList.toggle('on',needsFollowup>0);}
+}
+
+function updateBnavLabels(){
+  const t=T[lang];
+  const labels={bnavHomeLabel:lang==='ar'?'الرئيسية':'Home',bnavHistLabel:t.histLabel,bnavWeeklyLabel:lang==='ar'?'الأسبوع':'Weekly',bnavMenuLabel:t.menuLabel};
+  Object.entries(labels).forEach(([id,txt])=>{const el=$(id);if(el)el.textContent=txt;});
+  // install banner labels
+  const it=$('installTitle');const is=$('installSub');
+  if(it) it.textContent=lang==='ar'?'ثبّت التطبيق':'Install App';
+  if(is) is.textContent=lang==='ar'?'أضفه للشاشة الرئيسية للوصول السريع':'Add to home screen for quick access';
+  const ib=$('installBtn');const id2=$('installDismiss');
+  if(ib) ib.textContent=isIOS?(lang==='ar'?'كيفية التثبيت':'How to Install'):(lang==='ar'?'تثبيت':'Install');
+  if(id2) id2.textContent=lang==='ar'?'لاحقاً':'Later';
+  // iOS guide labels
+  const igt=$('iosGuideTitle');
+  if(igt) igt.textContent=lang==='ar'?'أضف التطبيق للشاشة الرئيسية':'Add to Home Screen';
+  const s1=$('iosStep1'),s2=$('iosStep2'),s3=$('iosStep3');
+  if(s1) s1.innerHTML=lang==='ar'?'اضغط على زر المشاركة <strong>⬆</strong> في أسفل المتصفح':'Tap the Share button <strong>⬆</strong> at the bottom of Safari';
+  if(s2) s2.innerHTML=lang==='ar'?'اختر <strong>"إضافة إلى الشاشة الرئيسية"</strong>':'Select <strong>"Add to Home Screen"</strong>';
+  if(s3) s3.innerHTML=lang==='ar'?'اضغط <strong>"إضافة"</strong> في الأعلى':'Tap <strong>"Add"</strong> in the top right';
+  const igc=$('iosGuideClose');
+  if(igc) igc.textContent=lang==='ar'?'حسناً، فهمت':'Got it';
+}
+
+/* ==================== THEME COLOR META ==================== */
+function updateThemeColorMeta(){
+  const color=theme==='dark'?'#090d12':'#f0f6fb';
+  document.getElementById('themeColorMeta').content=color;
+}
+
+/* ==================== CLAUDE API ==================== */
+
+async function analyzeWithClaude(problem, rel, lang){
+  const isAr = lang === 'ar';
+  const prompt = isAr
+    ? `أنت مستشار متخصص في العلاقات الأسرية تجمع بين علم النفس الحديث والحكمة الإسلامية.
+المستخدم يواجه مشكلة في علاقته مع: ${rel}
+المشكلة: "${problem}"
+
+اكتب ردك بالعربية الفصحى البسيطة داخل هذه الوسوم فقط — لا تكتب أي شيء خارجها:
+
+###DIAG###
+تحليل نفسي متعاطف في فقرة أو فقرتين، يصف ما يشعر به الشخص ولماذا يحدث هذا نفسياً.
+###END_DIAG###
+###AYAH###
+نص الآية القرآنية أو الحديث النبوي الأنسب للموقف.
+###END_AYAH###
+###SOURCE###
+المصدر مثل: سورة الحجرات، آية 10
+###END_SOURCE###
+###ISLAM###
+كيف يعالج الإسلام هذا النوع من المشاكل في فقرة واحدة عملية.
+###END_ISLAM###
+###STEPS###
+- خطوة عملية محددة جداً يمكن تطبيقها اليوم
+- خطوة عملية محددة للأسبوع القادم
+- خطوة استراتيجية على المدى البعيد
+###END_STEPS###
+###YTQUERY###
+جملة بحث يوتيوب عربية مستخلصة من جوهر المشكلة تحديداً، من 6 إلى 9 كلمات
+###END_YTQUERY###`
+    : `You are a specialist family counselor combining modern psychology and Islamic wisdom.
+The user has a problem in their "${rel}" relationship.
+Problem: "${problem}"
+
+Write strictly inside these tags in clear simple English — nothing outside them:
+
+###DIAG###
+Empathetic psychological analysis in 1-2 paragraphs describing what the person feels and why.
+###END_DIAG###
+###AYAH###
+The most relevant Quranic verse or Hadith for this situation.
+###END_AYAH###
+###SOURCE###
+Source e.g.: Surah Al-Hujurat, Verse 10
+###END_SOURCE###
+###ISLAM###
+How Islam addresses this problem in one practical paragraph.
+###END_ISLAM###
+###STEPS###
+- A very specific practical step to apply today
+- A practical step for next week
+- A long-term strategic step
+###END_STEPS###
+###YTQUERY###
+A YouTube search query extracted from the specific problem, 5-8 words
+###END_YTQUERY###`;
+
+  const res = await fetch('/api/analyze', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+
+  if (!res.ok) {
+    const e = await res.json();
+    throw new Error(e.error?.message || 'API error');
+  }
+
+  const data = await res.json();
+  return data.text;
+}
+
+</script>
+</body>
+</html>
